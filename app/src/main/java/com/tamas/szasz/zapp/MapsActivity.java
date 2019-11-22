@@ -13,10 +13,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
 
@@ -70,6 +71,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addUserLocation();
     }
 
+
+
     private void addUserLocation(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -78,7 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setMyLocationEnabled(true);
-
+        mMap.setOnMapLongClickListener(this);
 //        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
 //            @Override
 //            public void onMyLocationChange(Location location) {
@@ -100,6 +103,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            }
 //        });
     }
+    @Override
+    public void onMapLongClick(LatLng point) {
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions()
+                .position(point)
+                .title("You are here")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
+    }
 
 }
