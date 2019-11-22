@@ -5,4 +5,12 @@
     <string name="btn_register">REGISTER</string>
     <string name="tw_email">EMAIL</string>
     <string name="tw_password">PASSWORD</string>
+    <string name="base_url">192.168.6.33:5070</string>
+    <string name="stations_url">/api/Stations</string>
+    <string name="auth_url">/api/Auth</string>
+    <string name="cars_url">/api/Cars</string>
+    <string name="category_url">/api/Category</string>
+    <string name="messages_url">/api/Messages</string>
+    <string name="topics_url">/api/Topics</string>
+    <string name="team_key">SWFMDCMMZBGU8</string>
 </resources>
