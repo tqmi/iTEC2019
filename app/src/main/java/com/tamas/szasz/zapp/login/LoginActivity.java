@@ -27,13 +27,12 @@ public class LoginActivity extends AppCompatActivity {
 
         userEmail = (String) ((TextView)findViewById(R.id.login_email_tw)).getText();
         userPassword = (String) ((TextView)findViewById(R.id.login_password_tw)).getText();
-        URL authURL;
+        URL authURL = null;
         try {
-            authURL = new URL(R.string.auth_url);
+            authURL = new URL(getString(R.string.auth_url));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
 
     }
 

@@ -1,9 +1,14 @@
 package com.tamas.szasz.zapp;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,6 +43,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        addUserLocation();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 100) {
+            for(int i = 0 ; i < permissions.length;i++)
+                switch (permissions[i]){
+                    case Manifest.permission.ACCESS_COARSE_LOCATION:
+
+                        if(grantResults[i] == PackageManager.PERMISSION_DENIED)
+                            return;
+
+                        break;
+                    case Manifest.permission.ACCESS_FINE_LOCATION:
+
+                        if(grantResults[i] == PackageManager.PERMISSION_DENIED)
+                            return;
+
+                        break;
+                }
+        } else {
+            return;
+        }
+        addUserLocation();
+    }
+
+    private void addUserLocation(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+
+        }
+
+        mMap.setMyLocationEnabled(true);
+
+//        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//            @Override
+//            public void onMyLocationChange(Location location) {
+//
+//                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
+//                CameraUpdate zoom = CameraUpdateFactory.zoomTo(11);
+//                mMap.clear();
+//
+//                MarkerOptions mp = new MarkerOptions();
+//
+//                mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
+//
+//                mp.title("my position");
+//
+//                mMap.addMarker(mp);
+//                mMap.moveCamera(center);
+//                mMap.animateCamera(zoom);
+//
+//            }
+//        });
+    }
+
+
 }
