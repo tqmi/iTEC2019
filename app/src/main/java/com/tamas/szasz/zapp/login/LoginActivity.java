@@ -30,10 +30,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginBTN(View view){
 //        LoginThread loginThread = new LoginThread();
 //        loginThread.run();
-//        InfoThread infoThread = new InfoThread();
-//        infoThread.run();
-        UpdateThread updateThread = new UpdateThread();
-        updateThread.run();
+        InfoThread infoThread = new InfoThread();
+        infoThread.run();
+//        UpdateThread updateThread = new UpdateThread();
+//        updateThread.run();
     }
 
 

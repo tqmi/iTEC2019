@@ -2,13 +2,18 @@ package com.tamas.szasz.zapp.login.retrofit_threads;
 
 import android.util.Log;
 
+import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginRequest;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginResponse;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserUpdateRequest;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserUpdateResponse;
+import com.tamas.szasz.zapp.login.retrofit_header.Header;
 import com.tamas.szasz.zapp.login.retrofit_interfaces.LoginInterface;
 import com.tamas.szasz.zapp.login.retrofit_interfaces.UpdateInterface;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +28,10 @@ public class UpdateThread extends Thread {
 
         UserUpdateRequest user = new UserUpdateRequest("hello", "there");
 
-        Call<UserUpdateResponse> call = updateInterface.updateUser(user);
+
+
+
+        Call<UserUpdateResponse> call = updateInterface.updateUser(Header.getHeader(),user);
         Log.d(TAG, call.request().toString());
         call.enqueue(new Callback<UserUpdateResponse>() {
             @Override
