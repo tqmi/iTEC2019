@@ -1,6 +1,7 @@
 package com.tamas.szasz.zapp.login.retrofit_interfaces;
 
 import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationRequest;
+import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,6 +16,6 @@ public interface RegisterInterface {
             "TEAM_KEY:SWFMDCMMZBGU8",
             "Content-Type: application/json"})
     @POST("Auth/Register")
-    Call<UserRegistrationRequest> registerUser(@Body UserRegistrationRequest userRegistrationRequest);
+    Call<UserRegistrationResponse> registerUser(@Body UserRegistrationRequest userRegistrationRequest);
 }
 

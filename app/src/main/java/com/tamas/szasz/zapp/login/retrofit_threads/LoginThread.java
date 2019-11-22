@@ -26,6 +26,8 @@ public class LoginThread extends Thread {
             @Override
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
                 Log.d(TAG, "Success" + response.body().getToken());
+
+                //TODO: extract and save token;
             }
 
             @Override
