@@ -5,4 +5,9 @@
     <string name="btn_register">REGISTER</string>
     <string name="tw_email">EMAIL</string>
     <string name="tw_password">PASSWORD</string>
+    <string name="act_login_BUT_Login">Let\'s charge!</string>
+    <string name="act_login_TV_Register">Not registered? Create an account here</string>
+    <string name="act_login_TV_ForgotPassword">Forgot?</string>
+    <string name="act_login_TIET_email_hint">Email</string>
+    <string name="act_login_TIET_password_hint">Password</string>
 </resources>
