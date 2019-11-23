@@ -21,6 +21,7 @@ public class RegisterThread extends Thread{
     private String lastName;
     private String password;
     private RegisterActivity context;
+    private UserRegistrationRequest user;
 
     public RegisterThread(String email,String firstName ,String lastName,String password,RegisterActivity context){
         this.email = email;
@@ -34,16 +35,23 @@ public class RegisterThread extends Thread{
     public void run() {
         RegisterInterface registerInterface = RetrofitInstance.getRetrofitInstance().create(RegisterInterface.class);
 
-        UserRegistrationRequest user = new UserRegistrationRequest(email, password, firstName, lastName);
+        user = new UserRegistrationRequest(email, password, firstName, lastName);
 
         Call<UserRegistrationResponse> call = registerInterface.registerUser(user);
         Log.d(TAG, call.request().toString());
         call.enqueue(new Callback<UserRegistrationResponse>() {
             @Override
             public void onResponse(Call<UserRegistrationResponse> call, Response<UserRegistrationResponse> response) {
+
+                Log.d(TAG,response + " ");
+
                 try {
 
                     User.getInstance().setToken(response.body().getToken());
+                    User.getInstance().setLastName(user.getLastName());
+                    User.getInstance().setFirstName(user.getFirstName());
+                    User.getInstance().setEmail(user.getEmail());
+
 
                     context.onRegisterSuccess();
 

@@ -2,6 +2,7 @@ package com.tamas.szasz.zapp.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -9,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tamas.szasz.zapp.NavigationActivity;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.cars.Car;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.AddThread;
@@ -60,7 +63,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(!matcherEmail.matches()){
             //TODO: handle incorrect email
+            Toast.makeText(this,"Invalid email!",Toast.LENGTH_LONG).show();
             Log.d("REGISTER FAILED","incorrectEmail");
+            return;
+        }
+
+        if(firstName.length() < 1 || lastName.length() < 1){
+            //TODO: show something
+            Toast.makeText(this,"Fill in name!",Toast.LENGTH_LONG).show();
+            Log.d("REGISTRATION FAILED","name missing");
             return;
         }
 
@@ -74,11 +85,22 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onRegisterSuccess(){
         Log.d("REGITER SUCCESS","here");
+
+        goToMapsActivity();
+
     }
 
     public void onRegisterFailed(){
 
+        Toast.makeText(this,"Registration failed! Try again!",Toast.LENGTH_LONG).show();
+
     }
+
+    private  void goToMapsActivity() {
+        Intent mapsIntent = new Intent(this, NavigationActivity.class);
+        startActivity(mapsIntent);
+    }
+
 
     private void showPassword() {
         final ImageView imageViewShowPassword = findViewById(R.id.act_register_IV_ShowPassword);
