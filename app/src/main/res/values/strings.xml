@@ -57,4 +57,10 @@
     <string name="preferences_my_cars">My Cars</string>
     <string name="popup_edit_BTN_remove">Remove car</string>
     <string name="frag_cars_BTN_add">Add car</string>
+    <string name="frag_cars_add_TIET_model_hint">Model</string>
+    <string name="frag_cars_add_TIET_company_hint">Company</string>
+    <string name="frag_cars_add_TIET_autonomy_hint">Autonomy</string>
+    <string name="frag_cars_add_TIET_batteryLife_hint">Battery Life</string>
+    <string name="frag_cars_add_TIET_year_hint">Year</string>
+    <string name="frag_cars_add_TIET_lastTechRevision_hint">Last Technical Revision</string>
 </resources>

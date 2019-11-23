@@ -139,6 +139,8 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
                     try {
                         _deleteThread.join();
                         mDataSet.remove(carPosition);
+                        notifyDataSetChanged();
+                        mPopWindow.dismiss();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
