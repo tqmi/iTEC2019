@@ -62,10 +62,14 @@ public class User {
 
     public void setToken(String token) {
 
-        Log.d("TOKEN","savingToken");
-        SharedPreferences sharedPreferences = context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
-        sharedPreferences.edit().putString("Token",token);
-
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+        SharedPreferences.Editor _userEditor = sharedPreferences.edit();
+        _userEditor.putString("TOKEN", token);
+        _userEditor.apply();
         this.token = token;
+        Log.d("TOKEN","savingToken");
+//        SharedPreferences sharedPreferences = context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
+//        sharedPreferences.edit().putString("Token",token);
+//        this.token = token;
     }
 }

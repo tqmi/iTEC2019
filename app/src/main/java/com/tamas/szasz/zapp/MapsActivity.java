@@ -61,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         break;
                     case Manifest.permission.ACCESS_FINE_LOCATION:
-
                         if(grantResults[i] == PackageManager.PERMISSION_DENIED)
                             return;
 

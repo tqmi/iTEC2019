@@ -3,17 +3,15 @@ package com.tamas.szasz.zapp.login;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-=======
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
->>>>>>> 2a3f03e79fed8536ab8c8274477529399b088894
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -106,11 +104,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private  boolean getSavedToken(){
         Log.d("TOKEN","geting token");
-        SharedPreferences sharedPref = this.getSharedPreferences("TOKEN",MODE_PRIVATE);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         String storedToken = null;
-        if(sharedPref.contains("Token")){
-            storedToken = sharedPref.getString("Token",null);
+        if(sharedPref.contains("TOKEN")){
+            storedToken = sharedPref.getString("TOKEN",null);
         }
 
         if(storedToken != null){
