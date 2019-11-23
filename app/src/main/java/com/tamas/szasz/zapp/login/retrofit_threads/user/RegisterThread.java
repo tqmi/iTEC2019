@@ -43,7 +43,6 @@ public class RegisterThread extends Thread{
             @Override
             public void onResponse(Call<UserRegistrationResponse> call, Response<UserRegistrationResponse> response) {
 
-                Log.d(TAG,response + " ");
 
                 try {
 
@@ -59,6 +58,7 @@ public class RegisterThread extends Thread{
 
                 }catch (Exception e){
                     context.onRegisterFailed();
+                    Log.d(TAG, "Failure " + response.toString());
                     //TODO: handle unsuccessful register
                 }
 
@@ -66,7 +66,7 @@ public class RegisterThread extends Thread{
 
             @Override
             public void onFailure(Call<UserRegistrationResponse> call, Throwable t) {
-                Log.d(TAG, "Failure " + t.toString());
+                Log.d(TAG, "Failure " + call.toString());
                 context.onRegisterFailed();
             }
         });
