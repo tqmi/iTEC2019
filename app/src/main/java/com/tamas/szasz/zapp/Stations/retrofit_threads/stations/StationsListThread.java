@@ -41,6 +41,7 @@ public class StationsListThread extends Thread {
 
                 Log.d(TAG,response + "");
                 try {
+
                     ArrayList<Station> arrayList = new ArrayList<>();
 
                     for(int i = 0 ; i < response.body().length ; i++) {
@@ -60,7 +61,7 @@ public class StationsListThread extends Thread {
 
                     }
 
-                    Log.d(TAG,"success");
+                    Log.d(TAG,"success" + response.body().length);
 
                 }catch (Exception e){
 

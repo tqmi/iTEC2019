@@ -1,6 +1,9 @@
 package com.tamas.szasz.zapp.Stations;
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.tamas.szasz.zapp.NavigationActivity;
 
 import java.util.ArrayList;
 
@@ -8,6 +11,11 @@ public class StationHandler {
 
     private ArrayList<Station> stations;
     private static StationHandler instance;
+    private NavigationActivity context;
+
+    public void setContext(NavigationActivity context) {
+        this.context = context;
+    }
 
     private StationHandler(){
 
@@ -29,8 +37,11 @@ public class StationHandler {
 
     public void addStation(Station s){
 
-        if(!isPartOfStations(s))
+        if(!isPartOfStations(s)) {
             stations.add(s);
+            context.addMarker(s.getLatLng());
+
+        }
 
     }
 

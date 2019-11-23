@@ -38,8 +38,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tamas.szasz.zapp.Stations.Station;
 import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.StationsUpdater;
+import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsListThread;
 import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -68,6 +70,8 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         checkPermissions();
         setUpMap();
         StationsUpdater.getInstance().setContext(this);
+        StationHandler.getInstance().setContext(this);
+        StationsUpdater.getInstance().start();
 
     }
 
@@ -119,21 +123,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-    public void refreshMap(){
-        ArrayList<LatLng> stationPoints = StationHandler.getInstance().getPositions();
-
-        if(mMap != null){
-
-            for(LatLng pos : stationPoints){
-
-                mMap.addMarker(new MarkerOptions().position(pos));
-
-            }
-
-
-        }
-
-    }
 
     private void addUserLocation(){
         mMap.setMyLocationEnabled(true);
@@ -179,6 +168,24 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     public boolean isCoarseLocationPermissionGranted() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void refreshtations(View view){
+
+        StationsListThread stationsListThread = new StationsListThread();
+        stationsListThread.run();
+
+        try {
+            stationsListThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addMarker(LatLng latLng){
+
+        mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
     }
 
 }

@@ -22,6 +22,16 @@
             android:focusable="true"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_settings_20px" />
-    </fragment>
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="refreshtations"
+            android:text="Button" />
+
+
+
+
+    </fragment>
 </LinearLayout>
