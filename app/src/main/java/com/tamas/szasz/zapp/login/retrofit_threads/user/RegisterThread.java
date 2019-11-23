@@ -1,16 +1,13 @@
-package com.tamas.szasz.zapp.login.retrofit_threads;
+package com.tamas.szasz.zapp.login.retrofit_threads.user;
 
 import android.util.Log;
 
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.RegisterActivity;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationResponse;
-import com.tamas.szasz.zapp.login.retrofit_interfaces.RegisterInterface;
-import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserRegistrationResponse;
+import com.tamas.szasz.zapp.login.retrofit_interfaces.user.RegisterInterface;
+import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserRegistrationRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;

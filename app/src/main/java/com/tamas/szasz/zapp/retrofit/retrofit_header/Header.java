@@ -1,4 +1,4 @@
-package com.tamas.szasz.zapp.login.retrofit_header;
+package com.tamas.szasz.zapp.retrofit.retrofit_header;
 
 import com.tamas.szasz.zapp.credentials.User;
 

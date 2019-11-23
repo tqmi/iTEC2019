@@ -1,13 +1,10 @@
-package com.tamas.szasz.zapp.login.retrofit_interfaces;
+package com.tamas.szasz.zapp.login.retrofit_interfaces.user;
 
-import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationRequest;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationResponse;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserRegistrationRequest;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserRegistrationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 

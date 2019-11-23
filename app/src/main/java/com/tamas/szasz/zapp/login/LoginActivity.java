@@ -17,8 +17,8 @@ import androidx.preference.PreferenceManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.credentials.User;
-import com.tamas.szasz.zapp.login.retrofit_threads.InfoThread;
-import com.tamas.szasz.zapp.login.retrofit_threads.LoginThread;
+import com.tamas.szasz.zapp.login.retrofit_threads.user.InfoThread;
+import com.tamas.szasz.zapp.login.retrofit_threads.user.LoginThread;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 //            return;
 //        }
 
-        LoginThread loginThread = new LoginThread(inputEmail,inputPassword);
+        LoginThread loginThread = new LoginThread(inputEmail,inputPassword,this );
         loginThread.run();
 
     }
@@ -110,17 +110,17 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
-    private static void getInfo(){
+    private void getInfo(){
         InfoThread infoThread = new InfoThread();
         infoThread.run();
     }
 
-    public static void loginSuccessful(){
+    public void loginSuccessful(){
         logedIn = true;
         getInfo();
     }
 
-    public static void loginDenied(){
+    public void loginDenied(){
         Log.d("LOGIN FAILED","failed login");
     }
 

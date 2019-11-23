@@ -1,13 +1,13 @@
-package com.tamas.szasz.zapp.login.retrofit_threads;
+package com.tamas.szasz.zapp.login.retrofit_threads.user;
 
 import android.util.Log;
 
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.LoginActivity;
-import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginRequest;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginResponse;
-import com.tamas.szasz.zapp.login.retrofit_interfaces.LoginInterface;
+import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserLoginRequest;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserLoginResponse;
+import com.tamas.szasz.zapp.login.retrofit_interfaces.user.LoginInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,11 +17,13 @@ public class LoginThread extends Thread {
     private static final String TAG = "LOGIN";
     private String email;
     private String password;
+    private LoginActivity context;
 
-    public LoginThread(String email,String password){
+    public LoginThread(String email,String password,LoginActivity context){
         super();
         this.email = email;
         this.password = password;
+        this.context = context;
     }
 
     @Override
@@ -38,20 +40,20 @@ public class LoginThread extends Thread {
                 try {
 
                     User.getInstance().setToken(response.body().getToken());
-                    LoginActivity.loginSuccessful();
+                    context.loginSuccessful();
 
 
 
                 }catch (Exception e){
                     //TODO: handle unsuccessful login
-                    LoginActivity.loginDenied();
+                    context.loginDenied();
                 }
             }
 
             @Override
             public void onFailure(Call<UserLoginResponse> call, Throwable t) {
                 Log.d(TAG, "Failure " + t.toString());
-                LoginActivity.loginDenied();
+                context.loginDenied();
             }
         });
     }

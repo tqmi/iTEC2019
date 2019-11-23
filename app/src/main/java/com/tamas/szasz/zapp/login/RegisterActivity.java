@@ -12,7 +12,8 @@ import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
-import com.tamas.szasz.zapp.login.retrofit_threads.RegisterThread;
+import com.tamas.szasz.zapp.cars.retrofit_threads.cars.ListThread;
+import com.tamas.szasz.zapp.login.retrofit_threads.user.RegisterThread;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,15 +36,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onRegisterBTN(View view){
 
-        String firstName = null;
+        /*String firstName = null;
         String lastName = null;
         String email = null;
         String password = null;
 
         firstName = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
-        lastName = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
-        email = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
-        password = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
+        lastName = ((TextInputEditText)findViewById(R.id.act_register_TIET_lastName)).getText().toString();
+        email = ((TextInputEditText)findViewById(R.id.act_register_TIET_email)).getText().toString();
+        password = ((TextInputEditText)findViewById(R.id.act_register_TIET_password)).getText().toString();
 
         String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
@@ -55,26 +56,40 @@ public class RegisterActivity extends AppCompatActivity {
             //TODO: handle incorrect email
             Log.d("REGISTER FAILED","incorrectEmail");
             return;
-        }
+        }*/
 
-        String regexPassword = "((?=.*[a-z])(?=.*\\\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})";
-        Pattern patternPassword = Pattern.compile(regexPassword);
-        Matcher matcherPassword = patternPassword.matcher(password);
+//        String patternPassword;
+//
+//        StringBuilder patternBuilder = new StringBuilder("((?=.*[a-z])");
+//            patternBuilder.append("(?=.*[@#$%_])");
+//
+//            patternBuilder.append("(?=.*[A-Z])");
+//
+//            patternBuilder.append("(?=.*d)");
+//
+//        patternBuilder.append(".{" + 6 + "," + 20 + "})");
+//        patternPassword = patternBuilder.toString();
+//
+//        Pattern p = Pattern.compile(patternPassword);
+//        Matcher matcherPassword = p.matcher(password);
+//
+//        if(!matcherPassword.matches()){
+//            Log.d("REGISTER FAILED","incorrectpassword");
+//            //TODO: handle incorrect password
+//            return;
+//        }
 
-        if(!matcherPassword.matches()){
-            Log.d("REGISTER FAILED","incorrectpassword");
-            //TODO: handle incorrect password
-            return;
-        }
+//        RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
+//        registerThread.run();
 
-        RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
-        registerThread.run();
+        ListThread listThread = new ListThread(this);
+        listThread.run();
 
 
     }
 
     public void onRegisterSuccess(){
-        Log.d("REGITER SUCCESS","");
+        Log.d("REGITER SUCCESS","here");
     }
 
     public void onRegisterFailed(){

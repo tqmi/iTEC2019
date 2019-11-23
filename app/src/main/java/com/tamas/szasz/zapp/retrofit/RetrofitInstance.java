@@ -1,4 +1,4 @@
-package com.tamas.szasz.zapp.login.retrofit_classes;
+package com.tamas.szasz.zapp.retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

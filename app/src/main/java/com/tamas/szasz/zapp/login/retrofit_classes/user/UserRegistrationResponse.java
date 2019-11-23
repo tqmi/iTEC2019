@@ -1,4 +1,4 @@
-package com.tamas.szasz.zapp.login.retrofit_classes;
+package com.tamas.szasz.zapp.login.retrofit_classes.user;
 
 public class UserRegistrationResponse extends UserRegistrationRequest {
     private String token;

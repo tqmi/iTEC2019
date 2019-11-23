@@ -1,19 +1,12 @@
-package com.tamas.szasz.zapp.login.retrofit_threads;
+package com.tamas.szasz.zapp.login.retrofit_threads.user;
 
 import android.util.Log;
 
-import com.tamas.szasz.zapp.credentials.User;
-import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginRequest;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginResponse;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserUpdateRequest;
-import com.tamas.szasz.zapp.login.retrofit_classes.UserUpdateResponse;
-import com.tamas.szasz.zapp.login.retrofit_header.Header;
-import com.tamas.szasz.zapp.login.retrofit_interfaces.LoginInterface;
-import com.tamas.szasz.zapp.login.retrofit_interfaces.UpdateInterface;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserUpdateRequest;
+import com.tamas.szasz.zapp.login.retrofit_classes.user.UserUpdateResponse;
+import com.tamas.szasz.zapp.retrofit.retrofit_header.Header;
+import com.tamas.szasz.zapp.login.retrofit_interfaces.user.UpdateInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;
