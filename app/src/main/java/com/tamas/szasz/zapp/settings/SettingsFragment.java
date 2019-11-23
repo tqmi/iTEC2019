@@ -21,6 +21,8 @@ import androidx.preference.SwitchPreference;
 
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.SettingsActivity;
+import com.tamas.szasz.zapp.Stations.Station;
+import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.LoginActivity;
 import com.tamas.szasz.zapp.main.fragments.CarsFragment;
@@ -76,6 +78,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                StationsUpdater.getInstance().closeThread();
                 User.getInstance().deleteToken();
                 getActivity().finishAffinity();
                 Intent loginIntent = new Intent(context, LoginActivity.class);

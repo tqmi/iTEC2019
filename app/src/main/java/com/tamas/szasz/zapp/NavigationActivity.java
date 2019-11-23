@@ -38,6 +38,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -63,6 +64,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         setSettingsOnClick();
         checkPermissions();
         setUpMap();
+        StationsUpdater.getInstance().start();
     }
 
     private void setSettingsOnClick() {
@@ -89,6 +91,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         if(this.permissions) {
             addUserLocation();
         }
+        StationsUpdater.getInstance().run();
     }
 
     @Override
