@@ -14,7 +14,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.cars.Car;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.AddThread;
+import com.tamas.szasz.zapp.cars.retrofit_threads.cars.DeleteThread;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.ListThread;
+import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_threads.user.RegisterThread;
 
 import java.util.regex.Matcher;
@@ -60,31 +62,9 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-//        String patternPassword;
-//
-//        StringBuilder patternBuilder = new StringBuilder("((?=.*[a-z])");
-//            patternBuilder.append("(?=.*[@#$%_])");
-//
-//            patternBuilder.append("(?=.*[A-Z])");
-//
-//            patternBuilder.append("(?=.*d)");
-//
-//        patternBuilder.append(".{" + 6 + "," + 20 + "})");
-//        patternPassword = patternBuilder.toString();
-//
-//        Pattern p = Pattern.compile(patternPassword);
-//        Matcher matcherPassword = p.matcher(password);
-//
-//        if(!matcherPassword.matches()){
-//            Log.d("REGISTER FAILED","incorrectpassword");
-//            //TODO: handle incorrect password
-//            return;
-//        }
-
 
         RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
         registerThread.run();
-
 
     }
 

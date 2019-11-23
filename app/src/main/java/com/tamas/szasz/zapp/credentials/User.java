@@ -65,6 +65,14 @@ public class User {
         this.context = context;
     }
 
+    public ArrayList<Car> getCars(){
+        return cars;
+    }
+
+    public Car getCarAt(int i){
+        return cars.get(i);
+    }
+
     public void setToken(String token) {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);

@@ -20,6 +20,7 @@ public class ListThread extends Thread {
     private LoginActivity context;
 
     public ListThread(LoginActivity context) {
+        super();
         this.context = context;
     }
 

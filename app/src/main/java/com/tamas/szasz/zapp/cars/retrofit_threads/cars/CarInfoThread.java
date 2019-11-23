@@ -1,7 +1,6 @@
 package com.tamas.szasz.zapp.cars.retrofit_threads.cars;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.util.Log;
 
 import com.tamas.szasz.zapp.cars.Car;
@@ -16,15 +15,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddThread extends Thread {
-    private static final String TAG = "LIST";
+public class CarInfoThread extends Thread {
+
+    private static final String TAG = "INFO";
     private Context context;
     private CarsAddRequest car;
 
-    public AddThread(String model, String company, int year, int autonomy, int batteryLeft, String lastTechRevision,Context context) {
-        super();
+    public CarInfoThread(Context context) {
         this.context = context;
-        car = new CarsAddRequest(model,company,year,autonomy,batteryLeft,lastTechRevision);
     }
 
     @Override
@@ -63,4 +61,6 @@ public class AddThread extends Thread {
             }
         });
     }
+
+
 }
