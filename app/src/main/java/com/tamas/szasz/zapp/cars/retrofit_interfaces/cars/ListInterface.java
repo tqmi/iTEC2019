@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 
 public interface ListInterface {
-    @GET("Auth/Cars")
-    Call<CarsListResponse> listCars(@HeaderMap Map<String,String> headers);
+    @GET("Cars")
+    Call<CarsListResponse[]> listCars(@HeaderMap Map<String,String> headers);
 }

@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onRegisterBTN(View view){
 
-        /*String firstName = null;
+        String firstName = null;
         String lastName = null;
         String email = null;
         String password = null;
@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
             //TODO: handle incorrect email
             Log.d("REGISTER FAILED","incorrectEmail");
             return;
-        }*/
+        }
 
 //        String patternPassword;
 //
@@ -79,11 +79,9 @@ public class RegisterActivity extends AppCompatActivity {
 //            return;
 //        }
 
-//        RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
-//        registerThread.run();
+        RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
+        registerThread.run();
 
-        ListThread listThread = new ListThread(this);
-        listThread.run();
 
 
     }

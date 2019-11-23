@@ -7,10 +7,15 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
+import com.tamas.szasz.zapp.cars.Car;
+
+import java.util.ArrayList;
+
 import static android.app.PendingIntent.getActivity;
 
 public class User {
 
+    private ArrayList<Car> cars;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,7 +24,7 @@ public class User {
     private Context context;
 
     private User(){
-
+        cars = new ArrayList<>();
     }
 
     public static User getInstance() {
@@ -68,8 +73,16 @@ public class User {
         _userEditor.apply();
         this.token = token;
         Log.d("TOKEN","savingToken");
-//        SharedPreferences sharedPreferences = context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
-//        sharedPreferences.edit().putString("Token",token);
-//        this.token = token;
+        Log.d("TOKEN",token);
     }
+
+    public void addCar(Car car){
+
+        if (cars.contains(car))
+            return;
+
+        cars.add(car);
+
+    }
+
 }

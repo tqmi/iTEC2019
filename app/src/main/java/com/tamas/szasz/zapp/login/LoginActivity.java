@@ -16,6 +16,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
+import com.tamas.szasz.zapp.cars.retrofit_threads.cars.ListThread;
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_threads.user.InfoThread;
 import com.tamas.szasz.zapp.login.retrofit_threads.user.LoginThread;
@@ -113,6 +114,8 @@ public class LoginActivity extends AppCompatActivity {
     private void getInfo(){
         InfoThread infoThread = new InfoThread();
         infoThread.run();
+        ListThread listThread = new ListThread(this);
+        listThread.run();
     }
 
     public void loginSuccessful(){
