@@ -98,6 +98,9 @@ public class User {
         SharedPreferences.Editor _userEditor = sharedPreferences.edit();
         _userEditor.remove("TOKEN");
         _userEditor.apply();
+
+        cars.clear();
+
     }
 
     public boolean deleteCar(String id) {
