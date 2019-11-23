@@ -12,6 +12,8 @@ import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
+import com.tamas.szasz.zapp.cars.Car;
+import com.tamas.szasz.zapp.cars.retrofit_threads.cars.AddThread;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.ListThread;
 import com.tamas.szasz.zapp.login.retrofit_threads.user.RegisterThread;
 
@@ -79,9 +81,9 @@ public class RegisterActivity extends AppCompatActivity {
 //            return;
 //        }
 
+
         RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
         registerThread.run();
-
 
 
     }

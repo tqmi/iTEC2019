@@ -9,7 +9,7 @@ public class Car {
     private int year;
     private int autonomy;
     private int batteryLeft;
-    private String lastTechRevision;
+    private String lastTechRevision; //can be parsed as localdatetime
     private String userId;
     private String id;
 
@@ -106,5 +106,19 @@ public class Car {
                 getLastTechRevision().equals( car.getLastTechRevision()) &&
                 getUserId().equals(car.getUserId()) &&
                 getId().equals( car.getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "model='" + model + '\'' +
+                ", company='" + company + '\'' +
+                ", year=" + year +
+                ", autonomy=" + autonomy +
+                ", batteryLeft=" + batteryLeft +
+                ", lastTechRevision='" + lastTechRevision + '\'' +
+                ", userId='" + userId + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 }
