@@ -27,10 +27,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        checkPermissions();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
+    }
+
+    private void checkPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+        }
     }
 
 
@@ -46,7 +54,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        addUserLocation();
     }
 
     @Override
@@ -58,13 +65,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         if(grantResults[i] == PackageManager.PERMISSION_DENIED)
                             return;
-
-                        break;
                     case Manifest.permission.ACCESS_FINE_LOCATION:
                         if(grantResults[i] == PackageManager.PERMISSION_DENIED)
                             return;
+                        addUserLocation();
 
-                        break;
                 }
         } else {
             return;
@@ -75,11 +80,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void addUserLocation(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-
-        }
 
         mMap.setMyLocationEnabled(true);
         mMap.setOnMapLongClickListener(this);

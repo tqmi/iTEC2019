@@ -8,26 +8,21 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tamas.szasz.zapp.MapsActivity;
+import com.tamas.szasz.zapp.NavigationActivity;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_threads.InfoThread;
 import com.tamas.szasz.zapp.login.retrofit_threads.LoginThread;
-import com.tamas.szasz.zapp.login.retrofit_threads.RegisterThread;
-import com.tamas.szasz.zapp.login.retrofit_threads.UpdateThread;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,11 +40,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         logedIn = false;
         User.getInstance().setContext(this);
-        if(getSavedToken()){
-            Log.d("TOKEN","got token");
+        if(isSavedToken()){
             logedIn = true;
-            //TODO: token saved, get user info and start map activity
+            goToMapsActivity();
         }
+    }
+
+    private  void goToMapsActivity() {
+        Intent mapsIntent = new Intent(this, NavigationActivity.class);
+        startActivity(mapsIntent);
     }
 
     @Override
@@ -97,12 +96,12 @@ public class LoginActivity extends AppCompatActivity {
 //            return;
 //        }
 
-        LoginThread loginThread = new LoginThread(inputEmail,inputPassword);
+        LoginThread loginThread = new LoginThread(inputEmail,inputPassword, this);
         loginThread.run();
 
     }
 
-    private  boolean getSavedToken(){
+    private  boolean isSavedToken(){
         Log.d("TOKEN","geting token");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -120,17 +119,23 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
-    private static void getInfo(){
+    private void getInfo(){
         InfoThread infoThread = new InfoThread();
         infoThread.run();
+        try {
+            infoThread.join();
+            goToMapsActivity();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void loginSuccessful(){
+    public void loginSuccessful(){
         logedIn = true;
         getInfo();
     }
 
-    public static void loginDenied(){
+    public void loginDenied(){
         Log.d("LOGIN FAILED","failed login");
     }
 

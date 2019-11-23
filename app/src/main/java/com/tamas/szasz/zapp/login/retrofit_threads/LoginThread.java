@@ -1,5 +1,6 @@
 package com.tamas.szasz.zapp.login.retrofit_threads;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.tamas.szasz.zapp.credentials.User;
@@ -15,13 +16,15 @@ import retrofit2.Response;
 
 public class LoginThread extends Thread {
     private static final String TAG = "LOGIN";
+    private LoginActivity activity;
     private String email;
     private String password;
 
-    public LoginThread(String email,String password){
+    public LoginThread(String email,String password, LoginActivity activity){
         super();
         this.email = email;
         this.password = password;
+        this.activity = activity;
     }
 
     @Override
@@ -38,20 +41,20 @@ public class LoginThread extends Thread {
                 try {
 
                     User.getInstance().setToken(response.body().getToken());
-                    LoginActivity.loginSuccessful();
+                    activity.loginSuccessful();
 
 
 
                 }catch (Exception e){
                     //TODO: handle unsuccessful login
-                    LoginActivity.loginDenied();
+                    activity.loginDenied();
                 }
             }
 
             @Override
             public void onFailure(Call<UserLoginResponse> call, Throwable t) {
                 Log.d(TAG, "Failure " + t.toString());
-                LoginActivity.loginDenied();
+                activity.loginDenied();
             }
         });
     }
