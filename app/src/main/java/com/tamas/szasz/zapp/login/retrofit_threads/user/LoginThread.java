@@ -15,10 +15,9 @@ import retrofit2.Response;
 
 public class LoginThread extends Thread {
     private static final String TAG = "USER LOGIN";
-    private LoginActivity activity;
     private String email;
     private String password;
-    private LoginActivity context;
+    private LoginActivity activity;
 
     public LoginThread(String email,String password, LoginActivity activity){
         super();

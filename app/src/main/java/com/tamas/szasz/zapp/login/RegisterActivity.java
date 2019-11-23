@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.tamas.szasz.zapp.NavigationActivity;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.cars.Car;
@@ -63,19 +64,27 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(!matcherEmail.matches()){
             //TODO: handle incorrect email
-            Toast.makeText(this,"Invalid email!",Toast.LENGTH_LONG).show();
-            Log.d("REGISTER FAILED","incorrectEmail");
+            ((TextInputLayout) this.findViewById(R.id.act_register_TIL_email)).setError("Invalid email");
             return;
         }
-
+        ((TextInputLayout) this.findViewById(R.id.act_register_TIL_email)).setErrorEnabled(false);
         if(firstName.length() < 1 || lastName.length() < 1){
             //TODO: show something
-            Toast.makeText(this,"Fill in name!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Field required!",Toast.LENGTH_LONG).show();
             Log.d("REGISTRATION FAILED","name missing");
             return;
         }
 
+        String regexPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).*[A-Za-z0-9].{8,}$";
+        Pattern patternPassword = Pattern.compile(regexPassword);
+        Matcher matcherPassword = patternPassword.matcher(password);
 
+        if(!matcherPassword.matches()){
+            ((TextInputLayout) this.findViewById(R.id.act_register_TIL_password)).setError("Invalid password. Needs upper, lower, number and special!");
+            //TODO: handle incorrect password
+            return;
+        }
+        ((TextInputLayout) this.findViewById(R.id.act_register_TIL_password)).setErrorEnabled(false);
         RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
         registerThread.run();
 /*

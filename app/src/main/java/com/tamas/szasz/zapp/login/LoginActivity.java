@@ -10,10 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.tamas.szasz.zapp.NavigationActivity;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.ListThread;
@@ -78,19 +81,20 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!matcherEmail.matches()){
             //TODO: handle incorrect email
+            ((TextInputLayout) this.findViewById(R.id.act_login_TIL_email)).setError("Invalid email");
             Log.d("LOGIN FAILED","incorrectEmail");
             return;
         }
 
-//        String regexPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-//        Pattern patternPassword = Pattern.compile(regexPassword);
-//        Matcher matcherPassword = patternPassword.matcher(inputPassword);
-//
-//        if(!matcherPassword.matches()){
-//            Log.d("LOGIN FAILED","incorrectpassword");
-//            //TODO: handle incorrect password
-//            return;
-//        }
+        String regexPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).*[A-Za-z0-9].{8,}$";
+        Pattern patternPassword = Pattern.compile(regexPassword);
+        Matcher matcherPassword = patternPassword.matcher(inputPassword);
+
+        if(!matcherPassword.matches()){
+            Log.d("LOGIN FAILED","incorrectpassword");
+            //TODO: handle incorrect password
+            return;
+        }
 
         LoginThread loginThread = new LoginThread(inputEmail,inputPassword, this);
         loginThread.run();
@@ -135,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginDenied(){
-        Log.d("LOGIN FAILED","failed login");
+        Toast.makeText(this, "Log in failed. Check your password or register!", Toast.LENGTH_LONG).show();
     }
 
 
