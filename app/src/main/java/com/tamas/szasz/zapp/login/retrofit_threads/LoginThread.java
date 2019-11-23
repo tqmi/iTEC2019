@@ -2,6 +2,7 @@ package com.tamas.szasz.zapp.login.retrofit_threads;
 
 import android.util.Log;
 
+import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginRequest;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginResponse;
@@ -25,7 +26,13 @@ public class LoginThread extends Thread {
         call.enqueue(new Callback<UserLoginResponse>() {
             @Override
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
-                Log.d(TAG, "Success" + response.body().getToken());
+                try {
+                    Log.d(TAG, "Success" + response.body().getToken());
+
+                    User.getInstance().setToken(response.body().getToken());
+                }catch (Exception e){
+                    //TODO: handle unsuccessful login
+                }
             }
 
             @Override

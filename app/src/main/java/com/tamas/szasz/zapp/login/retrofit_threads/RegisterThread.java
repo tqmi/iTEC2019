@@ -2,6 +2,8 @@ package com.tamas.szasz.zapp.login.retrofit_threads;
 
 import android.util.Log;
 
+import com.tamas.szasz.zapp.credentials.User;
+import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationResponse;
 import com.tamas.szasz.zapp.login.retrofit_interfaces.RegisterInterface;
 import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserRegistrationRequest;
@@ -15,34 +17,33 @@ import retrofit2.Response;
 
 public class RegisterThread extends Thread{
 
-        public void run() {
-            RegisterInterface registerInterface = RetrofitInstance.getRetrofitInstance().create(RegisterInterface.class);
-            JSONObject obj = new JSONObject();
-            JSONObject objDetails = new JSONObject();
-            try {
-                obj.put("email", "davide@gmail.com");
-                obj.put("password", "123456Aa_");
-                obj.put("firstName", "David");
-                obj.put("lastName", "Buzatu");
+    private static final String TAG = "REGISTER";
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+    @Override
+    public void run() {
+        RegisterInterface registerInterface = RetrofitInstance.getRetrofitInstance().create(RegisterInterface.class);
+
+        UserRegistrationRequest user = new UserRegistrationRequest("davide2@gmail.com", "123456Aa_", "David", "Buzatu");
+
+        Call<UserRegistrationResponse> call = registerInterface.registerUser(user);
+        Log.d(TAG, call.request().toString());
+        call.enqueue(new Callback<UserRegistrationResponse>() {
+            @Override
+            public void onResponse(Call<UserRegistrationResponse> call, Response<UserRegistrationResponse> response) {
+                try {
+                    Log.d(TAG, "Success" + response.body().getToken());
+
+                    User.getInstance().setToken(response.body().getToken());
+                }catch (Exception e){
+                    //TODO: handle unsuccessful register
+                }
+
             }
 
-            UserRegistrationRequest user = new UserRegistrationRequest("davide@gmail.com", "123456Aa_", "David", "Buzatu");
-
-            Call<UserRegistrationRequest> call = registerInterface.registerUser(user);
-            Log.d("REGISTER", call.request().toString());
-            call.enqueue(new Callback<UserRegistrationRequest>() {
-                @Override
-                public void onResponse(Call<UserRegistrationRequest> call, Response<UserRegistrationRequest> response) {
-                    Log.d("REGISTER", "Success" + response);
-                }
-
-                @Override
-                public void onFailure(Call<UserRegistrationRequest> call, Throwable t) {
-                    Log.d("REGISTER", "Failure " + t.toString());
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<UserRegistrationResponse> call, Throwable t) {
+                Log.d(TAG, "Failure " + t.toString());
+            }
+        });
+    }
 }

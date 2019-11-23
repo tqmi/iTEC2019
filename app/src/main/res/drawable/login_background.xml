@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item  android:gravity="bottom|left" android:bottom="35dp" android:left="75dp">
+        <rotate
+            android:fromDegrees="30"
+            android:toDegrees="30"
+            android:pivotX="50%"
+            android:pivotY="50%" >
+            <shape
+                android:shape="rectangle">
+                <gradient
+                    android:angle="90"
+                    android:endColor="@color/colorPrimaryDark"
+                    android:startColor="@color/colorPrimary"
+                    android:type="linear"
+                    />
+                <corners android:radius="6dp" />
+                <size android:height="90dp" android:width="20dp"/>
+            </shape>
+        </rotate>
+    </item>
+    <item  android:gravity="bottom|left" android:bottom="10dp" android:left="120dp">
+        <rotate
+            android:fromDegrees="30"
+            android:toDegrees="30"
+            android:pivotX="50%"
+            android:pivotY="50%" >
+            <shape
+                android:shape="rectangle">
+                <gradient
+                    android:angle="90"
+                    android:endColor="@color/colorPrimaryDark"
+                    android:startColor="@color/colorPrimary"
+                    android:type="linear"
+                    />
+                <corners android:radius="6dp" />
+                <size android:height="90dp" android:width="20dp"/>
+            </shape>
+        </rotate>
+    </item>
+    <item  android:gravity="bottom|left" android:bottom="-70dp" android:left="-55dp">
+        <rotate
+            android:fromDegrees="30"
+            android:toDegrees="30"
+            android:pivotX="50%"
+            android:pivotY="50%" >
+        <shape
+            android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryRed"
+                android:type="linear"
+                />
+            <corners android:radius="0dp" />
+            <size android:height="140dp" android:width="270dp"/>
+        </shape>
+        </rotate>
+    </item>
+
+
+</layer-list>
+
