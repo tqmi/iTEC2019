@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.cars.Car;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.AddThread;
+import com.tamas.szasz.zapp.cars.retrofit_threads.cars.CarUpdateThread;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.DeleteThread;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.ListThread;
 import com.tamas.szasz.zapp.credentials.User;
@@ -40,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onRegisterBTN(View view){
 
+
         String firstName = null;
         String lastName = null;
         String email = null;
@@ -65,7 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
         registerThread.run();
-
+/*
+        CarUpdateThread carUpdateThread = new CarUpdateThread(new Car("new ","new",199,30,20,"2019-11-23T10:54:13.16"," ","d68f044b-38de-4749-9850-281a56b22269"),this);
+        carUpdateThread.run();*/
     }
 
     public void onRegisterSuccess(){

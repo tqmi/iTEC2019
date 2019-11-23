@@ -1,10 +1,18 @@
 package com.tamas.szasz.zapp.login;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import javax.swing.text.View;
-import javax.swing.text.html.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.NavigationActivity;
@@ -14,15 +22,8 @@ import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_threads.user.InfoThread;
 import com.tamas.szasz.zapp.login.retrofit_threads.user.LoginThread;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.widget.EditText;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
     private boolean mShowPasswordTrue;
