@@ -7,6 +7,7 @@
     <string name="tw_password">PASSWORD</string>
     <string name="act_login_BUT_Login">Let\'s charge!</string>
     <string name="act_login_TV_Register">Don\'t have an account? <u>Register here!</u></string>
+
     <string name="act_login_TV_ForgotPassword">Forgot?</string>
     <string name="act_login_TIET_email_hint">Email</string>
     <string name="act_login_TIET_password_hint">Password</string>
@@ -18,6 +19,7 @@
     <string name="messages_url">/api/Messages</string>
     <string name="topics_url">/api/Topics</string>
     <string name="team_key">SWFMDCMMZBGU8</string>
+
     <string name="act_register_TV_Register">Please fill in all the fields</string>
     <string name="act_register_TIET_firstName_hint">First Name</string>
     <string name="act_register_TIET_lastName_hint">Last Name</string>
