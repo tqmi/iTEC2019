@@ -48,6 +48,7 @@ public class LoginThread extends Thread {
 
 
 
+                    Log.d(TAG,"success");
                 }catch (Exception e){
                     //TODO: handle unsuccessful login
                     activity.loginDenied();

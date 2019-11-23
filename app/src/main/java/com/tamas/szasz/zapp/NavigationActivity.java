@@ -67,7 +67,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         setSettingsOnClick();
         checkPermissions();
         setUpMap();
-        StationsUpdater.getInstance().start(this);
+        StationsUpdater.getInstance().setContext(this);
+        StationsUpdater.getInstance().start();
+
     }
 
     private void setSettingsOnClick() {

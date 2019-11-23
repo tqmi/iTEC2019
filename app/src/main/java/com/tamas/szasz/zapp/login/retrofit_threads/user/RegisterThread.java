@@ -55,6 +55,8 @@ public class RegisterThread extends Thread{
 
                     context.onRegisterSuccess();
 
+                    Log.d(TAG,"success");
+
                 }catch (Exception e){
                     context.onRegisterFailed();
                     //TODO: handle unsuccessful register
