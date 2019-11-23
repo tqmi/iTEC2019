@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
+import com.tamas.szasz.zapp.login.retrofit_threads.RegisterThread;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -25,6 +31,54 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         showPassword();
+    }
+
+    public void onRegisterBTN(View view){
+
+        String firstName = null;
+        String lastName = null;
+        String email = null;
+        String password = null;
+
+        firstName = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
+        lastName = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
+        email = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
+        password = ((TextInputEditText)findViewById(R.id.act_register_TIET_firstName)).getText().toString();
+
+        String regexEmail = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
+        Pattern patternEmail = Pattern.compile(regexEmail);
+
+        Matcher matcherEmail = patternEmail.matcher(email);
+
+        if(!matcherEmail.matches()){
+            //TODO: handle incorrect email
+            Log.d("REGISTER FAILED","incorrectEmail");
+            return;
+        }
+
+        String regexPassword = "((?=.*[a-z])(?=.*\\\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})";
+        Pattern patternPassword = Pattern.compile(regexPassword);
+        Matcher matcherPassword = patternPassword.matcher(password);
+
+        if(!matcherPassword.matches()){
+            Log.d("REGISTER FAILED","incorrectpassword");
+            //TODO: handle incorrect password
+            return;
+        }
+
+        RegisterThread registerThread = new RegisterThread(email,firstName,lastName,password,this);
+        registerThread.run();
+
+
+    }
+
+    public void onRegisterSuccess(){
+        Log.d("REGITER SUCCESS","");
+    }
+
+    public void onRegisterFailed(){
+
     }
 
     private void showPassword() {
@@ -47,4 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }

@@ -1,37 +1,27 @@
 package com.tamas.szasz.zapp.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.retrofit_threads.InfoThread;
 import com.tamas.szasz.zapp.login.retrofit_threads.LoginThread;
-import com.tamas.szasz.zapp.login.retrofit_threads.RegisterThread;
-import com.tamas.szasz.zapp.login.retrofit_threads.UpdateThread;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static android.app.PendingIntent.getActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private boolean mShowPasswordTrue;
@@ -134,12 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("LOGIN FAILED","failed login");
     }
 
-    public void onRegisterBTN(View view){
-//        RegisterThread registerThread = new RegisterThread();
-//        registerThread.run();
 
-
-    }
 
 
     private void showPassword() {
