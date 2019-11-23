@@ -56,7 +56,7 @@ import java.util.ArrayList;
 
 import static androidx.navigation.Navigation.findNavController;
 
-public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener{
     private GoogleMap mMap;
     private boolean permissions = false;
 
@@ -67,7 +67,8 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         setSettingsOnClick();
         checkPermissions();
         setUpMap();
-        StationsUpdater.getInstance().start(this);
+        StationsUpdater.getInstance().setContext(this);
+
     }
 
     private void setSettingsOnClick() {

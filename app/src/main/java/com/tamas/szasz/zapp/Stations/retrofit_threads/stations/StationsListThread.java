@@ -7,11 +7,6 @@ import com.tamas.szasz.zapp.Stations.Station;
 import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.retrofit_classes.stations.StationsListResponse;
 import com.tamas.szasz.zapp.Stations.retrofit_interfaces.stations.StationsListInterface;
-import com.tamas.szasz.zapp.cars.Car;
-import com.tamas.szasz.zapp.cars.retrofit_classes.cars.CarsListResponse;
-import com.tamas.szasz.zapp.cars.retrofit_interfaces.cars.ListInterface;
-import com.tamas.szasz.zapp.credentials.User;
-import com.tamas.szasz.zapp.login.LoginActivity;
 import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
 import com.tamas.szasz.zapp.retrofit.retrofit_header.Header;
 

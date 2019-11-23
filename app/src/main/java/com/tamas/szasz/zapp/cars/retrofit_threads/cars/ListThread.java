@@ -53,7 +53,7 @@ public class ListThread extends Thread {
                     }
 
 
-                    //TODO: insert in cars;
+                    Log.d(TAG,"success");
                 }catch (Exception e){
 
                     Log.d(TAG,"error");

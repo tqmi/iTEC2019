@@ -9,7 +9,7 @@ public class StationsUpdater extends Thread {
 
     private boolean running;
     private static StationsUpdater instance;
-    private NavigationActivity context;
+    private Context context;
 
     private StationsUpdater() {
         super();
@@ -19,23 +19,6 @@ public class StationsUpdater extends Thread {
         if(instance == null)
             instance = new StationsUpdater();
         return instance;
-    }
-
-    public synchronized void start(NavigationActivity context) {
-        this.context = context;
-
-        StationsListThread stationsListThread = new StationsListThread();
-        stationsListThread.run();
-
-        try{
-            stationsListThread.join();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        running = true;
-
-        super.start();
     }
 
     @Override
@@ -55,7 +38,7 @@ public class StationsUpdater extends Thread {
                 e.printStackTrace();
             }
 
-//            context.refreshMap();
+            ((NavigationActivity)context).refreshMap();
 
             try {
                 Thread.sleep(30000);
@@ -74,6 +57,10 @@ public class StationsUpdater extends Thread {
     public void closeThread(){
         running = false;
         interrupt();
+    }
+
+    public void setContext(Context context){
+        this.context = context;
     }
 
 }

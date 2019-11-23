@@ -8,7 +8,6 @@ import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.res.PointF;
 import com.tamas.szasz.zapp.Stations.retrofit_classes.stations.StationsAddRequest;
 import com.tamas.szasz.zapp.Stations.retrofit_classes.stations.StationsAddResponse;
-import com.tamas.szasz.zapp.Stations.retrofit_classes.stations.StationsListResponse;
 import com.tamas.szasz.zapp.Stations.retrofit_interfaces.stations.StationsAddInterface;
 import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
 import com.tamas.szasz.zapp.retrofit.retrofit_header.Header;

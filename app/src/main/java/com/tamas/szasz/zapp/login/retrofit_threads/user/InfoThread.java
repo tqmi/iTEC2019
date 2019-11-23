@@ -28,11 +28,13 @@ public class InfoThread extends Thread {
                 Log.d(TAG,response+"");
 
                 try {
-                    Log.d(TAG, "Success" + response.body().getEmail() + " " + response.body().getFirstName() + " " + response.body().getLastName());
 
                     User.getInstance().setEmail(response.body().getEmail());
                     User.getInstance().setFirstName(response.body().getFirstName());
                     User.getInstance().setLastName(response.body().getLastName());
+
+
+                    Log.d(TAG,"success");
                 }catch (Exception e){
                     e.printStackTrace();
                 }
