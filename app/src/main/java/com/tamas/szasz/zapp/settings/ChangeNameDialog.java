@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.preference.Preference;
 
 import com.tamas.szasz.zapp.R;
+import com.tamas.szasz.zapp.login.retrofit_threads.user.UpdateThread;
 
 
 public class ChangeNameDialog {
@@ -66,7 +67,16 @@ public class ChangeNameDialog {
         return true;
     }
 
-    private void saveDisplayName(final String newDisplayName) {
+    private void saveDisplayName(final String newFirstName) {
+        UpdateThread updateThread = new UpdateThread(mContext);
+        updateThread.setFirstName(newFirstName);
+        updateThread.run();
+        try {
+            updateThread.join();
+            mPreference.setSummary(newFirstName);
 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
