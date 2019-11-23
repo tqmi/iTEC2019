@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class CarsFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Car> mDataSet;
-    private PopupWindow mPopWindow;
+    private CustomPopupWindow mPopWindow;
     private TextInputEditText mTextInputEditTextDate;
     private final Calendar calendar = Calendar.getInstance();
     private String mLastTechRevision;
@@ -86,6 +87,7 @@ public class CarsFragment extends Fragment {
         _display.getSize(_size);
 
         mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y - 300 , true, getContext(), view);
+        mPopWindow.setLocation(view, Gravity.BOTTOM, 0, 0);
         setUpEditTexts(_inflatedView);
         setUpLLayouts(_inflatedView);
         setUpPopupButtons(_inflatedView);

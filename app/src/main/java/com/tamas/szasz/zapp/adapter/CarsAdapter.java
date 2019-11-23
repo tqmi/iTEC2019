@@ -40,7 +40,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
         private TextView mTextViewCompanyPopUp;
         private TextView mTextViewAutonomyPopUp;
         private ImageView mImageViewEdit;
-        private PopupWindow mPopWindow;
+        private CustomPopupWindow mPopWindow;
         private Button mButtonRemoveCar;
         private String carID;
         private HashMap<String, String> details = new HashMap<>(3);
@@ -111,7 +111,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
 //            mPopWindow.setAnimationStyle(R.style.PopupAnimation);
 //            // show the popup at bottom of the screen and set some margin at bottom ie,
 //            mPopWindow.showAtLocation(v, Gravity.BOTTOM, 0, 0);
-
+            mPopWindow.setLocation(v, Gravity.BOTTOM, 0 , 0);
 
             setInformationInPopup(_inflatedView);
             setPopUpButtonsListeners(_inflatedView);

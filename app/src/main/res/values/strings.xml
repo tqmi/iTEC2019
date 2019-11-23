@@ -63,4 +63,9 @@
     <string name="frag_cars_add_TIET_batteryLife_hint">Battery Life</string>
     <string name="frag_cars_add_TIET_year_hint">Year</string>
     <string name="frag_cars_add_TIET_lastTechRevision_hint">Last Technical Revision</string>
+    <string name="act_navigation_TIET_station_name_hint">Station name</string>
+    <string name="act_navigation_TIET_total_sockets_hint">Nr. total sockets</string>
+    <string name="popup_add_station_TIET_station_name_hint">Station name</string>
+    <string name="popup_add_station_TIET_total_sockets_hint">Total sockets</string>
+    <string name="popup_add_station_BTN_add">Add station</string>
 </resources>

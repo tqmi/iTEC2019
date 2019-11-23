@@ -28,8 +28,7 @@ public class CustomPopupWindow extends PopupWindow {
         // make it outside touchable to dismiss the popup window
         this.setOutsideTouchable(true);
         this.setAnimationStyle(R.style.PopupAnimation);
-        // show the popup at bottom of the screen and set some margin at bottom ie,
-        this.showAtLocation(viewPos, Gravity.BOTTOM, 0, 0);
+
     }
 
     private void setPopupProps(ViewGroup parent, View viewPos) {
@@ -39,7 +38,9 @@ public class CustomPopupWindow extends PopupWindow {
         // make it outside touchable to dismiss the popup window
         this.setOutsideTouchable(true);
         this.setAnimationStyle(R.style.PopupAnimation);
-        // show the popup at bottom of the screen and set some margin at bottom ie,
-        this.showAtLocation(viewPos, Gravity.BOTTOM, 0, 0);
+    }
+
+    public void setLocation(View view, int gravity, int x, int y) {
+        this.showAtLocation(view, gravity, x, y);
     }
 }

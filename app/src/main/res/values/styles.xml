@@ -138,4 +138,9 @@
         <item name="android:windowExitAnimation">@anim/popup_hide</item>
     </style>
 
+    <style name="PopupAnimationTop">
+        <item name="android:windowEnterAnimation">@anim/popup_show_top</item>
+        <item name="android:windowExitAnimation">@anim/popup_hide_top</item>
+    </style>
+
 </resources>
