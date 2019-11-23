@@ -17,6 +17,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -48,6 +49,11 @@ import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.Stations.res.PointF;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsAddThread;
+
+import com.tamas.szasz.zapp.Stations.Station;
+import com.tamas.szasz.zapp.Stations.StationHandler;
+import com.tamas.szasz.zapp.Stations.StationsUpdater;
+import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsListThread;
 import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 import com.tamas.szasz.zapp.main.fragments.model.CustomPopupWindow;
 
@@ -83,6 +89,8 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         checkPermissions();
         setUpMap();
         StationsUpdater.getInstance().setContext(this);
+        StationHandler.getInstance().setContext(this);
+        StationsUpdater.getInstance().start();
 
     }
 
@@ -134,21 +142,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-    public void refreshMap(){
-        ArrayList<LatLng> stationPoints = StationHandler.getInstance().getPositions();
-
-        if(mMap != null){
-
-            for(LatLng pos : stationPoints){
-
-                mMap.addMarker(new MarkerOptions().position(pos));
-
-            }
-
-
-        }
-
-    }
 
     private void addUserLocation(){
         mMap.setMyLocationEnabled(true);
@@ -196,7 +189,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     public boolean isCoarseLocationPermissionGranted() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
-
 
 
 
@@ -260,7 +252,23 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private void setUpEditTexts(View inflatedView) {
         mTIETName = inflatedView.findViewById(R.id.popup_add_station_TIET_station_name);
         mTIETTotalSocket = inflatedView.findViewById(R.id.popup_add_station_TIET_total_sockets);
+    }
+    public void refreshtations(View view){
 
+        StationsListThread stationsListThread = new StationsListThread();
+        stationsListThread.run();
+
+        try {
+            stationsListThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Marker addMarker(LatLng latLng){
+
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
     }
 
 }

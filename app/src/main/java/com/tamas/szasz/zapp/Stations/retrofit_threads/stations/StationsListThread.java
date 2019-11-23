@@ -41,6 +41,7 @@ public class StationsListThread extends Thread {
 
                 Log.d(TAG,response + "");
                 try {
+
                     ArrayList<Station> arrayList = new ArrayList<>();
 
                     for(int i = 0 ; i < response.body().length ; i++) {
@@ -52,6 +53,19 @@ public class StationsListThread extends Thread {
 
                     StationHandler.getInstance().getStations().retainAll(arrayList);
 
+                    ArrayList<Station> stations = StationHandler.getInstance().getStations();
+
+                    for(int i = 0 ; i < stations.size() ; i++){
+
+                        if(!arrayList.contains(stations.get(i))){
+                            stations.get(i).getMarker().remove();
+                            stations.remove(i);
+                            i--;
+                        }
+
+                    }
+
+
                     for(int i = 0 ; i < arrayList.size() ; i++) {
 
 
@@ -60,7 +74,7 @@ public class StationsListThread extends Thread {
 
                     }
 
-                    Log.d(TAG,"success");
+                    Log.d(TAG,"success" + response.body().length);
 
                 }catch (Exception e){
 

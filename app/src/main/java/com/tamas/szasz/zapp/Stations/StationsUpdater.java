@@ -38,7 +38,6 @@ public class StationsUpdater extends Thread {
                 e.printStackTrace();
             }
 
-            ((NavigationActivity)context).refreshMap();
 
             try {
                 Thread.sleep(30000);
