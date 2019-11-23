@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.preference.Preference;
 
 import com.tamas.szasz.zapp.R;
+import com.tamas.szasz.zapp.login.retrofit_threads.user.UpdateThread;
 
 public class ChangeLastNameDialog {
     private Activity mActivity;
@@ -17,6 +18,7 @@ public class ChangeLastNameDialog {
     private String mDisplayName;
     private Preference mPreference;
     private SettingsFragment mSettingsFragment;
+    private  AlertDialog dialog;
 
     public ChangeLastNameDialog(Activity activity, String displayName, Preference preference, SettingsFragment fragment) {
         mActivity = activity;
@@ -47,8 +49,8 @@ public class ChangeLastNameDialog {
                 dialogInterface.dismiss();
             }
         });
-        AlertDialog _dialog = builder.create();
-        _dialog.show();
+        dialog = builder.create();
+        dialog.show();
         mDisplayNameEditText = _dialogLayout.findViewById(R.id.dialog_settings_last_name);
         mDisplayNameEditText.setHint(mDisplayName);
     }
@@ -61,7 +63,16 @@ public class ChangeLastNameDialog {
         return true;
     }
 
-    private void saveDisplayName(final String newDisplayName) {
+    private void saveDisplayName(final String newLastName) {
+        UpdateThread updateThread = new UpdateThread(mActivity);
+        updateThread.setLastName(newLastName);
+        updateThread.start();
+        try {
+            updateThread.join();
+            dialog.dismiss();
 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -35,6 +35,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private Preference mFeedback;
     private Preference mChangeLastNamePreference;
     private Preference mMyCarsPreference;
+    private String lastName, firstName;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -44,6 +45,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onResume() {
         super.onResume();
+        lastName = User.getInstance().getLastName();
+        firstName = User.getInstance().getFirstName();
 
         mActivity = getActivity();
         ((SettingsActivity) mActivity).setActionBarTitle(mActivity.getString(R.string.settings_bar_title));
@@ -123,11 +126,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void setFirstNamePreference() {
         mChangeFirstNamePreference = findPreference("first_name_change");
         assert mChangeFirstNamePreference != null;
-        mChangeFirstNamePreference.setSummary("");
+        mChangeFirstNamePreference.setSummary(firstName);
         mChangeFirstNamePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                new ChangeNameDialog(mActivity, "", mChangeFirstNamePreference, SettingsFragment.this);
+                new ChangeNameDialog(mActivity, firstName, mChangeFirstNamePreference, SettingsFragment.this);
                 return true;
             }
         });
@@ -136,11 +139,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private void setLastNamePreference() {
         mChangeLastNamePreference = findPreference("last_name_change");
         assert mChangeLastNamePreference != null;
-        mChangeLastNamePreference.setSummary("");
+        mChangeLastNamePreference.setSummary(lastName);
         mChangeLastNamePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                new ChangeLastNameDialog(mActivity, "", mChangeLastNamePreference, SettingsFragment.this);
+                new ChangeLastNameDialog(mActivity, lastName, mChangeLastNamePreference, SettingsFragment.this);
                 return true;
             }
         });
