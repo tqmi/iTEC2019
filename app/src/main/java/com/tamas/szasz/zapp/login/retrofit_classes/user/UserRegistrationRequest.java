@@ -17,6 +17,14 @@ public class UserRegistrationRequest {
         this.email = email;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
