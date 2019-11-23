@@ -2,6 +2,7 @@ package com.tamas.szasz.zapp.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,14 @@ public class ChangeLastNameDialog {
     private Preference mPreference;
     private SettingsFragment mSettingsFragment;
     private  AlertDialog dialog;
+    private Context mContext;
 
-    public ChangeLastNameDialog(Activity activity, String displayName, Preference preference, SettingsFragment fragment) {
+    public ChangeLastNameDialog(Context context, Activity activity, String displayName, Preference preference, SettingsFragment fragment) {
         mActivity = activity;
         mDisplayName = displayName;
         mPreference = preference;
         mSettingsFragment = fragment;
+        mContext = context;
         showDialog();
     }
 
@@ -64,12 +67,11 @@ public class ChangeLastNameDialog {
     }
 
     private void saveDisplayName(final String newLastName) {
-        UpdateThread updateThread = new UpdateThread(mActivity);
+        UpdateThread updateThread = new UpdateThread(mContext);
         updateThread.setLastName(newLastName);
-        updateThread.start();
+        updateThread.run();
         try {
             updateThread.join();
-            dialog.dismiss();
 
         } catch (InterruptedException e) {
             e.printStackTrace();

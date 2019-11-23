@@ -130,7 +130,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mChangeFirstNamePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                new ChangeNameDialog(mActivity, firstName, mChangeFirstNamePreference, SettingsFragment.this);
+                new ChangeNameDialog(getContext(), mActivity, firstName, mChangeFirstNamePreference, SettingsFragment.this);
                 return true;
             }
         });
@@ -143,7 +143,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         mChangeLastNamePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                new ChangeLastNameDialog(mActivity, lastName, mChangeLastNamePreference, SettingsFragment.this);
+                new ChangeLastNameDialog(getContext(), mActivity, lastName, mChangeLastNamePreference, SettingsFragment.this);
                 return true;
             }
         });

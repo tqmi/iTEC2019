@@ -2,6 +2,7 @@ package com.tamas.szasz.zapp.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,14 @@ public class ChangeNameDialog {
     private String mDisplayName;
     private Preference mPreference;
     private SettingsFragment mSettingsFragment;
+    private Context mContext;
 
-    public ChangeNameDialog(Activity activity, String displayName, Preference preference, SettingsFragment fragment) {
+    public ChangeNameDialog(Context context, Activity activity, String displayName, Preference preference, SettingsFragment fragment) {
         mActivity = activity;
         mDisplayName = displayName;
         mPreference = preference;
         mSettingsFragment = fragment;
+        this.mContext = context;
         showDialog();
     }
 
