@@ -103,7 +103,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
                 mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y / 3, true, parent, v);
             }
 //            // set a background drawable with rounders corners
-//            mPopWindow.setBackgroundDrawable(parent.getResources().getDrawable(R.drawable.bkg_appointment_options));
+//            mPopWindow.setBackgroundDrawable(parent.getResources().getDrawable(R.drawable.bkg_popwindow));
 //            // make it focusable to show the keyboard to enter in `EditText`
 //            mPopWindow.setFocusable(true);
 //            // make it outside touchable to dismiss the popup window

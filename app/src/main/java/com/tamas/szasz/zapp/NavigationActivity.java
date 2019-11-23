@@ -4,7 +4,11 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -15,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -31,6 +36,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -253,7 +259,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mTIETName = inflatedView.findViewById(R.id.popup_add_station_TIET_station_name);
         mTIETTotalSocket = inflatedView.findViewById(R.id.popup_add_station_TIET_total_sockets);
     }
-    public void refreshtations(View view){
+    public void refreshStations(View view){
 
         StationsListThread stationsListThread = new StationsListThread();
         stationsListThread.run();
@@ -267,8 +273,14 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     public Marker addMarker(LatLng latLng){
-
-        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
+        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true).icon(bitmapDescriptor));
     }
 
 }

@@ -1,7 +1,6 @@
 package com.tamas.szasz.zapp.main.fragments.model;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
@@ -22,7 +21,7 @@ public class CustomPopupWindow extends PopupWindow {
     }
 
     private void setPopupProps(Context context, View viewPos) {
-        this.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bkg_appointment_options));
+        this.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.bkg_popwindow));
         // make it focusable to show the keyboard to enter in `EditText`
         this.setFocusable(true);
         // make it outside touchable to dismiss the popup window
@@ -32,7 +31,7 @@ public class CustomPopupWindow extends PopupWindow {
     }
 
     private void setPopupProps(ViewGroup parent, View viewPos) {
-        this.setBackgroundDrawable(parent.getResources().getDrawable(R.drawable.bkg_appointment_options));
+        this.setBackgroundDrawable(parent.getResources().getDrawable(R.drawable.bkg_popwindow));
         // make it focusable to show the keyboard to enter in `EditText`
         this.setFocusable(true);
         // make it outside touchable to dismiss the popup window
