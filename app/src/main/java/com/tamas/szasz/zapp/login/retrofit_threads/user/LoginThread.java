@@ -1,6 +1,6 @@
 package com.tamas.szasz.zapp.login.retrofit_threads.user;
 
-import javax.security.auth.callback.Callback;
+import android.util.Log;
 
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.LoginActivity;
@@ -9,6 +9,8 @@ import com.tamas.szasz.zapp.login.retrofit_classes.user.UserLoginResponse;
 import com.tamas.szasz.zapp.login.retrofit_interfaces.user.LoginInterface;
 import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginThread extends Thread {

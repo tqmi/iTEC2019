@@ -93,4 +93,11 @@ public class User {
 
     }
 
+    public void deleteToken() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+        SharedPreferences.Editor _userEditor = sharedPreferences.edit();
+        _userEditor.remove("TOKEN");
+        _userEditor.apply();
+    }
+
 }

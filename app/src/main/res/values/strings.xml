@@ -53,4 +53,6 @@
     <string name="preferences_account">Account</string>
     <string name="preferences_first_name_change">First Name</string>
     <string name="preferences_last_name_change">Last Name</string>
+    <string name="frag_cars_TV_title">My vehicles</string>
+    <string name="preferences_my_cars">My Cars</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.tamas.szasz.zapp.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,8 @@ import androidx.preference.SwitchPreference;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.SettingsActivity;
 import com.tamas.szasz.zapp.credentials.User;
+import com.tamas.szasz.zapp.login.LoginActivity;
+import com.tamas.szasz.zapp.main.fragments.CarsFragment;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat {
@@ -29,19 +32,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private Activity mActivity;
     private Preference mFeedback;
     private Preference mChangeLastNamePreference;
+    private Preference mMyCarsPreference;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
     }
-
-    private void enablePasswordEmailChange() {
-        mChangeFirstNamePreference = findPreference("firstName_change");
-        mChangeFirstNamePreference.setSummary("");
-
-    }
-
-
 
     @Override
     public void onResume() {
@@ -49,24 +45,41 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         mActivity = getActivity();
         ((SettingsActivity) mActivity).setActionBarTitle(mActivity.getString(R.string.settings_bar_title));
+        setPreferencesForCurrentUser();
     }
 
 
     private void setPreferencesForCurrentUser() {
         setFirstNamePreference();
         setLastNamePreference();
-
+        setMyCarsPreference();
         setFeedbackPreference();
         setLogOut();
     }
 
+    private void setMyCarsPreference() {
+        mMyCarsPreference = findPreference("my_cars");
+        mMyCarsPreference.setFragment("com.tamas.szasz.zapp.main.fragments.CarsFragment");
+        mMyCarsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startFragment(new CarsFragment());
+                return true;
+            }
+        });
+    }
+
 
     private void setLogOut() {
+        final Context context = getContext();
         Preference preference = findPreference("logout");
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-//                User.getInstance().deleteToken();
+                User.getInstance().deleteToken();
+                getActivity().finishAffinity();
+                Intent loginIntent = new Intent(context, LoginActivity.class);
+                startActivity(loginIntent);
                 return false;
             }
         });
@@ -105,7 +118,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
 
     private void setFirstNamePreference() {
-        mChangeFirstNamePreference = findPreference("firstName_change");
+        mChangeFirstNamePreference = findPreference("first_name_change");
         assert mChangeFirstNamePreference != null;
         mChangeFirstNamePreference.setSummary("");
         mChangeFirstNamePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -118,7 +131,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void setLastNamePreference() {
-        mChangeLastNamePreference = findPreference("firstName_change");
+        mChangeLastNamePreference = findPreference("last_name_change");
         assert mChangeLastNamePreference != null;
         mChangeLastNamePreference.setSummary("");
         mChangeLastNamePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

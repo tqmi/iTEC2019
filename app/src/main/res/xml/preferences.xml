@@ -6,12 +6,14 @@
         app:key="account_category"
         app:title="@string/preferences_account">
         <Preference
-            app:key="email_change"
+            app:key="first_name_change"
             app:title="@string/preferences_first_name_change"/>
         <Preference
-            app:key="password_change"
+            app:key="last_name_change"
             app:title="@string/preferences_last_name_change"/>
-
+        <Preference
+            app:key="my_cars"
+            app:title="@string/preferences_my_cars"/>
 
     </PreferenceCategory>
 

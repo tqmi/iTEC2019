@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/car_item_CV_Car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        card_view:cardElevation="2dp"
+        app:cardCornerRadius="16dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp">
+            <ImageView
+                android:id="@+id/car_item_IV_car_item"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_electric_car_item"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                android:layout_marginEnd="4dp" />
+            <LinearLayout
+                android:id="@+id/car_item_LL_info_principal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/car_item_IV_car_item">
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/car_item_TV_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model"
+
+                    />
+                <TextView
+                    android:id="@+id/car_item_TV_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1999-09-29"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/car_item_LL_info_secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/car_item_LL_info_principal"
+                android:layout_marginStart="12dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/car_item_TV_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company"
+                />
+            <TextView
+                android:id="@+id/car_item_TV_autonomy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Autonomy"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/car_item_LL_info_secondary"
+                android:layout_marginStart="12dp">
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/car_item_TV_batteryLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="35%"
+                    />
+                <TextView
+                    android:id="@+id/car_item_TV_lastTechRevision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1999-09-09"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

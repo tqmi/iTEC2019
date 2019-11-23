@@ -3,8 +3,6 @@ package com.tamas.szasz.zapp.login;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.text.View;
-import javax.swing.text.html.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.NavigationActivity;
@@ -19,7 +17,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
