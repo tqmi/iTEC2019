@@ -16,7 +16,7 @@ import retrofit2.Response;
 
 public class CarUpdateThread extends Thread {
 
-    private static final String TAG = "DELETE";
+    private static final String TAG = "CAR UPDATE";
     private Context context;
     private Car car;
 
@@ -39,8 +39,8 @@ public class CarUpdateThread extends Thread {
         call.enqueue(new Callback<CarUpdateResponse>() {
             @Override
             public void onResponse(Call<CarUpdateResponse> call, Response<CarUpdateResponse> response) {
+                Log.d(TAG,response +" ");
                 try {
-                    Log.d(TAG,response +" ");
                     car.setCompany(response.body().getCompany());
                     car.setAutonomy(response.body().getAutonomy());
                     car.setBatteryLeft(response.body().getBatteryLeft());
@@ -49,7 +49,7 @@ public class CarUpdateThread extends Thread {
                     car.setModel(response.body().getModel());
                     car.setUserId(response.body().getUserId());
                     car.setId(response.body().getId());
-
+                    Log.d(TAG,"success");
                 }catch (Exception e){
 
                     Log.d(TAG,"error");

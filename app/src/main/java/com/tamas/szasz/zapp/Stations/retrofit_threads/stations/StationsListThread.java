@@ -22,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StationsListThread extends Thread {
-    private static final String TAG = "LIST STATIONS";
+    private static final String TAG = "STATIONS LIST";
     private Context context;
 
     public StationsListThread(Context context) {
@@ -43,10 +43,9 @@ public class StationsListThread extends Thread {
         call.enqueue(new Callback<StationsListResponse[]>() {
             @Override
             public void onResponse(Call<StationsListResponse[]> call, Response<StationsListResponse[]> response) {
-                try {
-                    Log.d(TAG,"Stations list response positive");
-                    Log.d(TAG,response + "");
 
+                Log.d(TAG,response + "");
+                try {
                     ArrayList<Station> arrayList = new ArrayList<>();
 
                     for(int i = 0 ; i < response.body().length ; i++) {
@@ -66,6 +65,7 @@ public class StationsListThread extends Thread {
 
                     }
 
+                    Log.d(TAG,"success");
 
                 }catch (Exception e){
 

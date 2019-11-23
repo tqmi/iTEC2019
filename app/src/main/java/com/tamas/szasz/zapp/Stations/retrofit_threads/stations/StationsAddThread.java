@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StationsAddThread extends Thread {
-    private static final String TAG = "ADD STATION";
+    private static final String TAG = "STATIONS ADD";
     private Context context;
     private String name;
     private int totalSockets;
@@ -50,14 +50,13 @@ public class StationsAddThread extends Thread {
         call.enqueue(new Callback<StationsAddResponse>() {
             @Override
             public void onResponse(Call<StationsAddResponse> call, Response<StationsAddResponse> response) {
+                Log.d(TAG,response+"");
                 try {
-                    Log.d(TAG,"Stations add response positive");
-
                     Station s = new Station(response.body().getName(),response.body().getTotalSockets(),response.body().getFreeSockets(),response.body().getLocation(),
                             response.body().getUserId(),response.body().getOldStationId(),response.body().getId());
 
                     StationHandler.getInstance().addStation(s);
-
+                    Log.d(TAG,"success");
                 }catch (Exception e){
 
                     Log.d(TAG,"error");

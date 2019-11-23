@@ -17,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddThread extends Thread {
-    private static final String TAG = "LIST";
+    private static final String TAG = "CAR ADD";
     private Context context;
     private CarsAddRequest car;
 
@@ -36,6 +36,7 @@ public class AddThread extends Thread {
         call.enqueue(new Callback<CarsAddResponse>() {
             @Override
             public void onResponse(Call<CarsAddResponse> call, Response<CarsAddResponse> response) {
+                Log.d(TAG,response + "");
                 try {
                     User.getInstance().addCar(new Car(
                             response.body().getModel(),
@@ -47,6 +48,9 @@ public class AddThread extends Thread {
                             response.body().getUserId(),
                             response.body().getId()
                     ));
+
+                    Log.d(TAG,"success");
+
                 }catch (Exception e){
 
                     Log.d(TAG,"error");

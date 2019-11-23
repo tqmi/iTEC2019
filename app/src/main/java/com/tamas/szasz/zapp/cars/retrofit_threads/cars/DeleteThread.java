@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class DeleteThread extends Thread {
 
-    private static final String TAG = "DELETE";
+    private static final String TAG = "CAR DELETE";
     private Context context;
     private String id;
 
@@ -35,7 +35,7 @@ public class DeleteThread extends Thread {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 try {
-                    Log.d(TAG,response.body() +" ");
+                    Log.d(TAG,response+" ");
 
                     if(response.body().equals("Car deleted!")) {
                         User.getInstance().deleteCar(id);

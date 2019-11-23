@@ -15,7 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateThread extends Thread {
-    private static final String TAG = "UPDATE";
+    private static final String TAG = "USER UPDATE";
     private String firstName = User.getInstance().getFirstName();
     private final Context context;
     private String lastName = User.getInstance().getLastName();
@@ -41,13 +41,15 @@ public class UpdateThread extends Thread {
         call.enqueue(new Callback<UserUpdateResponse>() {
             @Override
             public void onResponse(Call<UserUpdateResponse> call, Response<UserUpdateResponse> response) {
+                Log.d(TAG,response+"");
                 try {
-                    Log.d(TAG, "Success" + response.body().getFirstName());
-
                     User.getInstance().setFirstName(firstName);
                     User.getInstance().setLastName(lastName);
+
+                    Log.d(TAG, "Success");
                 } catch (Exception e) {
-                    Log.d("ERR", e.toString());
+                    Log.d(TAG, "error");
+                    e.printStackTrace();
                 }
             }
 

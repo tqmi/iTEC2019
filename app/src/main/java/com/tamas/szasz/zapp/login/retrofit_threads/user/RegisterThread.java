@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class RegisterThread extends Thread{
 
-    private static final String TAG = "REGISTER";
+    private static final String TAG = "USER REGISTER";
     private String email;
     private String firstName;
     private String lastName;

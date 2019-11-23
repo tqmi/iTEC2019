@@ -16,7 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ListThread extends Thread {
-    private static final String TAG = "LIST";
+    private static final String TAG = "CAR LIST";
     private LoginActivity context;
 
     public ListThread(LoginActivity context) {
@@ -33,6 +33,9 @@ public class ListThread extends Thread {
         call.enqueue(new Callback<CarsListResponse[]>() {
             @Override
             public void onResponse(Call<CarsListResponse[]> call, Response<CarsListResponse[]> response) {
+
+                Log.d(TAG,response+"");
+
                 try {
                     for(int i = 0 ; i < response.body().length ; i++){
 

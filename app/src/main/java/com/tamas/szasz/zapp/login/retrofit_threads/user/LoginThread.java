@@ -14,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginThread extends Thread {
-    private static final String TAG = "LOGIN";
+    private static final String TAG = "USER LOGIN";
     private LoginActivity activity;
     private String email;
     private String password;
@@ -38,6 +38,9 @@ public class LoginThread extends Thread {
         call.enqueue(new Callback<UserLoginResponse>() {
             @Override
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
+
+                Log.d(TAG,response+"");
+
                 try {
 
                     User.getInstance().setToken(response.body().getToken());

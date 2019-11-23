@@ -13,7 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InfoThread extends Thread {
-    private static final String TAG = "INFO";
+    private static final String TAG = "USER INFO";
 
     @Override
     public void run() {
@@ -24,6 +24,9 @@ public class InfoThread extends Thread {
         call.enqueue(new Callback<UserInfoResponse>() {
             @Override
             public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+
+                Log.d(TAG,response+"");
+
                 try {
                     Log.d(TAG, "Success" + response.body().getEmail() + " " + response.body().getFirstName() + " " + response.body().getLastName());
 
