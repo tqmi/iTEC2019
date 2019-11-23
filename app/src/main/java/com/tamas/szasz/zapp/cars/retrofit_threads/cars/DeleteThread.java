@@ -2,8 +2,10 @@ package com.tamas.szasz.zapp.cars.retrofit_threads.cars;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.tamas.szasz.zapp.cars.retrofit_interfaces.cars.DeleteInterface;
+import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.retrofit.RetrofitInstance;
 import com.tamas.szasz.zapp.retrofit.retrofit_header.Header;
 
@@ -33,7 +35,14 @@ public class DeleteThread extends Thread {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 try {
-                    Log.d(TAG,response +" ");
+                    Log.d(TAG,response.body() +" ");
+
+                    if(response.body().equals("Car deleted!")) {
+                        User.getInstance().deleteCar(id);
+                        Toast.makeText(context, "Car deleted!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error deleting car!", Toast.LENGTH_SHORT).show();
+                    }
 
                 }catch (Exception e){
 

@@ -34,8 +34,6 @@ public class ListThread extends Thread {
             @Override
             public void onResponse(Call<CarsListResponse[]> call, Response<CarsListResponse[]> response) {
                 try {
-                    Log.d(TAG,"Cars list response positive");
-
                     for(int i = 0 ; i < response.body().length ; i++){
 
                         User.getInstance().addCar(new Car(

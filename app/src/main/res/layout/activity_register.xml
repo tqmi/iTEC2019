@@ -97,20 +97,21 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#E4E4E4" />
+                    android:background="#E4E4E4"
+                    />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/act_register_TIL_lastName"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="#FFFFFF"
                     android:textColorHint="#000000"
                     android:theme="@style/TextInputLayoutTheme"
                     app:errorEnabled="true"
                     android:padding="8dp"
                     android:layout_marginTop="8dp"
-                    app:errorTextAppearance="@style/error_appearance"
                     android:layout_weight="0.5"
+                    app:errorTextAppearance="@style/error_appearance"
 
                     >
 

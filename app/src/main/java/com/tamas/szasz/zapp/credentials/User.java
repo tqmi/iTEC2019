@@ -100,4 +100,25 @@ public class User {
         _userEditor.apply();
     }
 
+    public boolean deleteCar(String id) {
+        int position = findCarByID(id);
+        if(position!= -1) {
+            cars.remove(position);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int findCarByID(String id) {
+        int counter = 0;
+        for(Car car: cars) {
+            if(car.getId().equals(id)) {
+                return counter;
+            }
+            counter++;
+        }
+        return -1;
+    }
+
 }

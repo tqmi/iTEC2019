@@ -18,6 +18,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         card_view:cardElevation="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="16dp">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,32 +27,33 @@
             android:padding="6dp">
             <ImageView
                 android:id="@+id/car_item_IV_car_item"
-                android:layout_width="120dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_electric_car_item"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:layout_marginEnd="4dp" />
             <LinearLayout
                 android:id="@+id/car_item_LL_info_principal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="center"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/car_item_IV_car_item">
                 <TextView
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/car_item_TV_model"
+                    android:id="@+id/car_item_TV_model_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Model"
+                    android:fontFamily="@font/roboto_thin"
 
                     />
                 <TextView
-                    android:id="@+id/car_item_TV_year"
+                    android:id="@+id/car_item_TV_model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1999-09-29"
                     />
             </LinearLayout>
 
@@ -59,20 +62,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="center"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/car_item_LL_info_principal"
                 android:layout_marginStart="12dp">
             <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/car_item_TV_company"
+                android:id="@+id/car_item_TV_company_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company"
+                android:fontFamily="@font/roboto_thin"
                 />
             <TextView
-                android:id="@+id/car_item_TV_autonomy"
+                android:id="@+id/car_item_TV_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Autonomy"
                 />
 
             </LinearLayout>
@@ -81,23 +85,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="center"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/car_item_LL_info_secondary"
                 android:layout_marginStart="12dp">
                 <TextView
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/car_item_TV_batteryLeft"
+                    android:id="@+id/car_item_TV_autonomy_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="35%"
+                    android:text="Autonomy"
+                    android:fontFamily="@font/roboto_thin"
                     />
                 <TextView
-                    android:id="@+id/car_item_TV_lastTechRevision"
+                    android:id="@+id/car_item_TV_autonomy"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
-                    android:text="1999-09-09"
                     />
 
             </LinearLayout>
+            <ImageView
+                android:id="@+id/car_item_IV_options"
+                android:padding="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#6598db"
+                android:src="@drawable/ic_baseline_more_vert_24px"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
