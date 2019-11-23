@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -183,9 +184,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
-    public void addMarker(LatLng latLng){
+    public Marker addMarker(LatLng latLng){
 
-        mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
     }
 
 }

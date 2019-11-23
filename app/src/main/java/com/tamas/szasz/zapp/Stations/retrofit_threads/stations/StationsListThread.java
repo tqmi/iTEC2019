@@ -53,6 +53,19 @@ public class StationsListThread extends Thread {
 
                     StationHandler.getInstance().getStations().retainAll(arrayList);
 
+                    ArrayList<Station> stations = StationHandler.getInstance().getStations();
+
+                    for(int i = 0 ; i < stations.size() ; i++){
+
+                        if(!arrayList.contains(stations.get(i))){
+                            stations.get(i).getMarker().remove();
+                            stations.remove(i);
+                            i--;
+                        }
+
+                    }
+
+
                     for(int i = 0 ; i < arrayList.size() ; i++) {
 
 

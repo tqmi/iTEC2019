@@ -2,6 +2,7 @@ package com.tamas.szasz.zapp.Stations;
 
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.tamas.szasz.zapp.Stations.res.PointF;
 import com.tamas.szasz.zapp.Stations.retrofit_classes.stations.StationsListResponse;
 
@@ -17,6 +18,15 @@ public class Station {
     private String oldStationId;
     private String id;
     private LatLng latLng;
+    private Marker marker;
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
+    }
 
     public Station(StationsListResponse station){
 

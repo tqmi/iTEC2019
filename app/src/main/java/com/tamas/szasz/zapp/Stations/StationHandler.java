@@ -39,7 +39,7 @@ public class StationHandler {
 
         if(!isPartOfStations(s)) {
             stations.add(s);
-            context.addMarker(s.getLatLng());
+            s.setMarker(context.addMarker(s.getLatLng()));
 
         }
 
