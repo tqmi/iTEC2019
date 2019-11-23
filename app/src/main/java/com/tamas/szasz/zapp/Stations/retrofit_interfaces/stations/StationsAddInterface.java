@@ -10,8 +10,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.POST;
 
 public interface StationsAddInterface {
-    @GET("Stations")
+    @POST("Stations")
     Call<StationsAddResponse> addStation(@HeaderMap Map<String,String> headers, @Body StationsAddRequest stationsAddRequest);
 }

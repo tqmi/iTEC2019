@@ -38,6 +38,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 
@@ -50,6 +51,8 @@ import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -64,7 +67,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         setSettingsOnClick();
         checkPermissions();
         setUpMap();
-        StationsUpdater.getInstance().start();
+        StationsUpdater.getInstance().start(this);
     }
 
     private void setSettingsOnClick() {
@@ -91,7 +94,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         if(this.permissions) {
             addUserLocation();
         }
-        StationsUpdater.getInstance().run();
     }
 
     @Override
@@ -116,7 +118,21 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
+    public void refreshMap(){
+        ArrayList<LatLng> stationPoints = StationHandler.getInstance().getPositions();
 
+        if(mMap != null){
+
+            for(LatLng pos : stationPoints){
+
+                mMap.addMarker(new MarkerOptions().position(pos));
+
+            }
+
+
+        }
+
+    }
 
     private void addUserLocation(){
         mMap.setMyLocationEnabled(true);

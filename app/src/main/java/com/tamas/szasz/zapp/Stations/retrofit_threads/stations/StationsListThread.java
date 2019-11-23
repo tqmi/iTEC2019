@@ -45,6 +45,7 @@ public class StationsListThread extends Thread {
             public void onResponse(Call<StationsListResponse[]> call, Response<StationsListResponse[]> response) {
                 try {
                     Log.d(TAG,"Stations list response positive");
+                    Log.d(TAG,response + "");
 
                     ArrayList<Station> arrayList = new ArrayList<>();
 

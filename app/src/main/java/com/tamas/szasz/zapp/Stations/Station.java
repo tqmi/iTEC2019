@@ -1,6 +1,7 @@
 package com.tamas.szasz.zapp.Stations;
 
 
+import com.google.android.gms.maps.model.LatLng;
 import com.tamas.szasz.zapp.Stations.res.PointF;
 import com.tamas.szasz.zapp.Stations.retrofit_classes.stations.StationsListResponse;
 
@@ -15,6 +16,7 @@ public class Station {
     private String userId;
     private String oldStationId;
     private String id;
+    private LatLng latLng;
 
     public Station(StationsListResponse station){
 
@@ -25,6 +27,7 @@ public class Station {
         this.userId = station.getUserId();
         this.oldStationId = station.getOldStationId();
         this.id = station.getId();
+        this.latLng = new LatLng(location.getX(),location.getY());
 
     }
 
@@ -36,6 +39,7 @@ public class Station {
         this.userId = userId;
         this.oldStationId = oldStationId;
         this.id = id;
+        this.latLng = new LatLng(location.getX(),location.getY());
     }
 
     public String getName() {
@@ -102,6 +106,9 @@ public class Station {
         return getId().equals(station.getId());
     }
 
+    public LatLng getLatLng(){
+        return latLng;
+    }
 
 }
 
