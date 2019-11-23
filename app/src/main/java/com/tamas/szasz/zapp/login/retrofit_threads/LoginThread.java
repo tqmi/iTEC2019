@@ -3,6 +3,7 @@ package com.tamas.szasz.zapp.login.retrofit_threads;
 import android.util.Log;
 
 import com.tamas.szasz.zapp.credentials.User;
+import com.tamas.szasz.zapp.login.LoginActivity;
 import com.tamas.szasz.zapp.login.retrofit_classes.RetrofitInstance;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginRequest;
 import com.tamas.szasz.zapp.login.retrofit_classes.UserLoginResponse;
@@ -14,12 +15,20 @@ import retrofit2.Response;
 
 public class LoginThread extends Thread {
     private static final String TAG = "LOGIN";
+    private String email;
+    private String password;
+
+    public LoginThread(String email,String password){
+        super();
+        this.email = email;
+        this.password = password;
+    }
 
     @Override
     public void run() {
         LoginInterface loginInterface = RetrofitInstance.getRetrofitInstance().create(LoginInterface.class);
 
-        UserLoginRequest user = new UserLoginRequest("davide@gmail.com", "123456Aa_");
+        UserLoginRequest user = new UserLoginRequest(email, password);
 
         Call<UserLoginResponse> call = loginInterface.loginUser(user);
         Log.d(TAG, call.request().toString());
@@ -27,17 +36,22 @@ public class LoginThread extends Thread {
             @Override
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
                 try {
-                    Log.d(TAG, "Success" + response.body().getToken());
 
                     User.getInstance().setToken(response.body().getToken());
+                    LoginActivity.loginSuccessful();
+
+
+
                 }catch (Exception e){
                     //TODO: handle unsuccessful login
+                    LoginActivity.loginDenied();
                 }
             }
 
             @Override
             public void onFailure(Call<UserLoginResponse> call, Throwable t) {
                 Log.d(TAG, "Failure " + t.toString());
+                LoginActivity.loginDenied();
             }
         });
     }

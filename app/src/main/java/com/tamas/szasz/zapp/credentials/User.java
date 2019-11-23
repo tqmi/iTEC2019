@@ -1,5 +1,14 @@
 package com.tamas.szasz.zapp.credentials;
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import androidx.preference.PreferenceManager;
+
+import static android.app.PendingIntent.getActivity;
+
 public class User {
 
     private String firstName;
@@ -7,9 +16,10 @@ public class User {
     private String email;
     private String token;
     private static User instance;
+    private Context context;
 
     private User(){
-        token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImp0aSI6ImRhMzkwMGQ3LWUyNmUtNDdmMi1hOTk1LTkyYjViNzZmMGYxNyIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpZCI6ImJjODNjNWVmLWU0NDAtNDk0MC1hY2RlLTRhYjcyYWJjOTQ5YyIsIm5iZiI6MTU3NDQzNjU0MSwiZXhwIjoxNTc0Njk1NzQxLCJpYXQiOjE1NzQ0MzY1NDF9.5SVjBedzR4hiPaXMqLsdmxfh2mhCUvZPV7fDi6nwtMg";
+
     }
 
     public static User getInstance() {
@@ -46,7 +56,16 @@ public class User {
         return token;
     }
 
+    public void setContext(Context context){
+        this.context = context;
+    }
+
     public void setToken(String token) {
+
+        Log.d("TOKEN","savingToken");
+        SharedPreferences sharedPreferences = context.getSharedPreferences("TOKEN",Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString("Token",token);
+
         this.token = token;
     }
 }
