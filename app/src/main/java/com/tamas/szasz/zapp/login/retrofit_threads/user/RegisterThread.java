@@ -43,6 +43,7 @@ public class RegisterThread extends Thread{
             @Override
             public void onResponse(Call<UserRegistrationResponse> call, Response<UserRegistrationResponse> response) {
 
+                Log.d(TAG,response+"");
 
                 try {
 
