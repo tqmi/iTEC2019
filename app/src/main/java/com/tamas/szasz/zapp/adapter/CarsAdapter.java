@@ -112,7 +112,6 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
 //            // show the popup at bottom of the screen and set some margin at bottom ie,
 //            mPopWindow.showAtLocation(v, Gravity.BOTTOM, 0, 0);
             mPopWindow.setLocation(v, Gravity.BOTTOM, 0 , 0);
-
             setInformationInPopup(_inflatedView);
             setPopUpButtonsListeners(_inflatedView);
 

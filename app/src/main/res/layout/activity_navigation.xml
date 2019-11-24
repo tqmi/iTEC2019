@@ -26,11 +26,11 @@
 
         <ImageView
             android:id="@+id/act_navigation_IV_Reload"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:onClick="refreshStations"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
             android:clickable="true"
             android:focusable="true"

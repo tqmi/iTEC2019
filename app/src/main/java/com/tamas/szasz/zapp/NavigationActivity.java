@@ -159,7 +159,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
         mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y /4 + 24, true, this, view);
         mPopWindow.setLocation(view, Gravity.TOP, 0, 0);
-        mPopWindow.setAnimationStyle(R.style.PopupAnimationTop);
         setUpPopupButtonsDetails(_inflatedView, selectedStation);
         setUpChargingSocketsNumber(_inflatedView, selectedStation);
     }
@@ -198,7 +197,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         downVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, true);
+                StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, false);
                 stationsVoteThread.run();
 
                 try {
