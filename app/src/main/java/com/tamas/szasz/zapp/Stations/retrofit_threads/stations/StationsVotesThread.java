@@ -33,8 +33,9 @@ public class StationsVotesThread extends Thread {
         this.context = context;
     }
 
-    public StationsVotesThread(Station station){
+    public StationsVotesThread(Context context, Station station){
         super();
+        this.context = context;
         this.station = station;
     }
 
@@ -50,18 +51,20 @@ public class StationsVotesThread extends Thread {
             public void onResponse(Call<StationsVotesResponse[]> call, Response<StationsVotesResponse[]> response) {
                 Log.d(TAG,response+"");
                 try{
-
+                    int up = 0 ;
+                    int down = 0;
                         for(int i = 0 ; i < response.body().length ; i++ ){
 
                             if(response.body()[i].isVote()){
-                                station.setUpVotes(station.getUpVotes() + 1);
+                                up++;
                             }else{
-                                station.setDownVotes(station.getDownVotes() + 1);
+                                down++;
                             }
 
-
-
                         }
+                        station.setDownVotes(down);
+                        station.setUpVotes(up);
+
                     Log.d(TAG,"success");
                 }catch (Exception e){
 

@@ -36,12 +36,6 @@
             android:focusable="true"
             android:background="@drawable/ic_refresh_24px" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="refreshStations"
-            android:text="Button" />
 
 
     </fragment>

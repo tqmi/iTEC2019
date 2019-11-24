@@ -60,6 +60,7 @@ import com.tamas.szasz.zapp.Stations.Station;
 import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsListThread;
+import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsVotesThread;
 import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 import com.tamas.szasz.zapp.main.fragments.model.CustomPopupWindow;
 
@@ -142,11 +143,49 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                             " has been clicked " + clickCount + " times.",
                     Toast.LENGTH_SHORT).show();
         }
-
+        showStationPopUp(this.findViewById(R.id.act_navigation_LL), marker);
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
         return false;
+    }
+
+    private void showStationPopUp(View view, Marker marker) {
+        final View _inflatedView = LayoutInflater.from(this).inflate(R.layout.popup_add_station, null, false);
+        // get device size
+        Display _display = this.getWindowManager().getDefaultDisplay();
+        final Point _size = new Point();
+        _display.getSize(_size);
+
+        mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y /4 + 24, true, this, view);
+        mPopWindow.setLocation(view, Gravity.TOP, 0, 0);
+        mPopWindow.setAnimationStyle(R.style.PopupAnimationTop);
+        setUpPopupButtonsDetails(_inflatedView, marker);
+    }
+
+    private void setUpPopupButtonsDetails(View inflatedView, Marker marker) {
+        Button upVote = inflatedView.findViewById(R.id.popup_details_BTN_up_vote);
+        Button downVote = inflatedView.findViewById(R.id.popup_details_BTN_down_vote);
+
+        upVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Station selectedStation = StationHandler.getInstance().getStationByMarker(marker);
+                StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, true);
+                stationsVoteThread.run();
+            }
+        });
+
+        downVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Station selectedStation = StationHandler.getInstance().getStationByMarker(marker);
+                StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, true);
+                stationsVoteThread.run();
+
+                stationsVoteThread.join();
+            }
+        });
     }
 
     @Override

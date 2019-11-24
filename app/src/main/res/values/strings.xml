@@ -68,4 +68,6 @@
     <string name="popup_add_station_TIET_station_name_hint">Station name</string>
     <string name="popup_add_station_TIET_total_sockets_hint">Total sockets</string>
     <string name="popup_add_station_BTN_add">Add station</string>
+    <string name="popup_details_down_vote">Down Vote</string>
+    <string name="popup_details_up_vote">Up Vote</string>
 </resources>
