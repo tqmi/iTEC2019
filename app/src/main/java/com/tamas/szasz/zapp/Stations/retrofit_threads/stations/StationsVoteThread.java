@@ -34,7 +34,7 @@ public class StationsVoteThread extends Thread {
         else
             vote = false;
 
-        Call<StationsVotesResponse> call = stationsVoteInterface.sendVote(Header.getHeader(),station.getId(),vote);
+        Call<StationsVotesResponse> call = stationsVoteInterface.sendVote(Header.getHeader(),station.getId(),value);
         Log.d(TAG, call.request().toString());
         call.enqueue(new Callback<StationsVotesResponse>() {
             @Override
