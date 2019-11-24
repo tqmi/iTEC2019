@@ -44,7 +44,6 @@ public class CarUpdateThread extends Thread {
                     car.setCompany(response.body().getCompany());
                     car.setAutonomy(response.body().getAutonomy());
                     car.setBatteryLeft(response.body().getBatteryLeft());
-                    car.setId(response.body().getId());
                     car.setLastTechRevision(response.body().getLastTechRevision());
                     car.setModel(response.body().getModel());
                     car.setUserId(response.body().getUserId());

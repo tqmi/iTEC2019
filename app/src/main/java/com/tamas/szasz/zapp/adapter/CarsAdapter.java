@@ -1,13 +1,16 @@
 package com.tamas.szasz.zapp.adapter;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -16,35 +19,37 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.cars.Car;
+import com.tamas.szasz.zapp.cars.retrofit_threads.cars.CarUpdateThread;
 import com.tamas.szasz.zapp.cars.retrofit_threads.cars.DeleteThread;
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.main.fragments.model.CustomPopupWindow;
 
+import java.text.BreakIterator;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder> {
     private ArrayList<Car> mDataSet;
     private Context mContext;
 
     public class CarsViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextViewModel;
-        private TextView mTextViewCompany;
-        private TextView mTextViewYear;
-        private TextView mTextViewAutonomy;
-        private TextView mTextViewBatteryLeft;
-        private TextView mTextViewLastTechRevision;
-        private TextView mTextViewModelPopUp;
-        private TextView mTextViewCompanyPopUp;
-        private TextView mTextViewAutonomyPopUp;
+        private TextView mTextViewModel, mTextViewCompany,  mTextViewAutonomy;
+        private TextInputEditText mEDTYearPopUp, mEDTLastTechRevisionPopUp, mEDTModelPopUp,
+                mEDTCompanyPopUp, mEDTAutonomyPopUp, mEDTBatteryLifePopUp;
         private ImageView mImageViewEdit;
         private CustomPopupWindow mPopWindow;
-        private Button mButtonRemoveCar;
+        private Button mButtonRemoveCar, mButtonEditCar;
         private String carID;
         private HashMap<String, String> details = new HashMap<>(3);
         private int carPosition;
+        private Car mCar;
+        private String mLastTechRevision;
 
 
         public CarsViewHolder(@NonNull View itemView, @NonNull final ViewGroup parent) {
@@ -61,11 +66,13 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
         }
 
         public void updateInfo(Car car, int position) {
+            mCar = car;
             mTextViewModel.setText(car.getModel());
             mTextViewCompany.setText(car.getCompany());
             mTextViewAutonomy.setText(car.getAutonomy() + "");
             carPosition = position;
             carID = car.getId();
+            mLastTechRevision = car.getLastTechRevision();
             setDetails(car);
         }
 
@@ -98,19 +105,10 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
             if (_size.y < 1350) {
                 mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y , true, parent, v);
             } else if (_size.y > 1350 && _size.y < 1900) {
-                mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y * 3 / 6, true, parent, v);
+                mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y * 3 / 4 + 200, true, parent, v);
             } else {
-                mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y / 3, true, parent, v);
+                mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y / 2 + 200, true, parent, v);
             }
-//            // set a background drawable with rounders corners
-//            mPopWindow.setBackgroundDrawable(parent.getResources().getDrawable(R.drawable.bkg_popwindow));
-//            // make it focusable to show the keyboard to enter in `EditText`
-//            mPopWindow.setFocusable(true);
-//            // make it outside touchable to dismiss the popup window
-//            mPopWindow.setOutsideTouchable(true);
-//            mPopWindow.setAnimationStyle(R.style.PopupAnimation);
-//            // show the popup at bottom of the screen and set some margin at bottom ie,
-//            mPopWindow.showAtLocation(v, Gravity.BOTTOM, 0, 0);
             mPopWindow.setLocation(v, Gravity.BOTTOM, 0 , 0);
             setInformationInPopup(_inflatedView);
             setPopUpButtonsListeners(_inflatedView);
@@ -129,6 +127,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
         }
 
         private void setPopUpButtonsListeners(View inflatedView) {
+            final Calendar calendar = Calendar.getInstance();
             mButtonRemoveCar = inflatedView.findViewById(R.id.popup_edit_BTN_remove_car);
             mButtonRemoveCar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -145,25 +144,78 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarsViewHolder
                     }
                 }
             });
+
+            mButtonEditCar = inflatedView.findViewById(R.id.popup_edit_BTN_edit_car);
+            mButtonEditCar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mCar.setAutonomy(Integer.parseInt(mEDTAutonomyPopUp.getText().toString()));
+                    mCar.setLastTechRevision(mLastTechRevision);
+                    mCar.setCompany(mEDTCompanyPopUp.getText().toString());
+                    mCar.setModel(mEDTModelPopUp.getText().toString());
+                    mCar.setYear(Integer.parseInt(mEDTYearPopUp.getText().toString()));
+                    mCar.setBatteryLeft(Integer.parseInt(mEDTBatteryLifePopUp.getText().toString()));
+                    CarUpdateThread carUpdateThread = new CarUpdateThread(mCar, mContext);
+                    carUpdateThread.run();
+
+                    try {
+                        carUpdateThread.join();
+                        mPopWindow.dismiss();
+                        notifyDataSetChanged();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, monthOfYear);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateET(calendar);
+                }
+
+            };
+            mEDTLastTechRevisionPopUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new DatePickerDialog(mContext, date, calendar
+                            .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            });
+        }
+
+        private void updateET(Calendar calendar) {
+            String dateFormat = "yyyy-MM-dd";
+            String timeFormat = "HH:mm:ss.SSS";
+            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
+            SimpleDateFormat sdfTime = new SimpleDateFormat(timeFormat, Locale.US);
+            mEDTLastTechRevisionPopUp.setText(sdf.format(calendar.getTime()));
+            mLastTechRevision = sdf.format(calendar.getTime() ) + "T" + sdfTime.format(calendar.getTime());
         }
 
         private void setInformationInPopup(View inflatedView) {
             setUpTextViewsInPop(inflatedView);
-            mTextViewModelPopUp.setText(mTextViewModel.getText().toString());
-            mTextViewCompanyPopUp.setText(mTextViewCompany.getText().toString());
-            mTextViewAutonomyPopUp.setText(mTextViewAutonomy.getText().toString());
-            mTextViewLastTechRevision.setText(details.get("lastTechRevision"));
-            mTextViewYear.setText(details.get("year"));
-            mTextViewBatteryLeft.setText(details.get("batteryLeft"));
+            mEDTModelPopUp.setText(mTextViewModel.getText().toString());
+            mEDTCompanyPopUp.setText(mTextViewCompany.getText().toString());
+            mEDTAutonomyPopUp.setText(mTextViewAutonomy.getText().toString());
+            mEDTLastTechRevisionPopUp.setText(details.get("lastTechRevision"));
+            mEDTYearPopUp.setText(details.get("year"));
+            mEDTBatteryLifePopUp.setText(details.get("batteryLeft"));
         }
 
         private void setUpTextViewsInPop(View inflatedView) {
-            mTextViewYear = inflatedView.findViewById(R.id.popup_edit_TV_year);
-            mTextViewBatteryLeft = inflatedView.findViewById(R.id.popup_edit_TV_battery_left);
-            mTextViewLastTechRevision = inflatedView.findViewById(R.id.popup_edit_TV_last_tech_revision);
-            mTextViewAutonomyPopUp = inflatedView.findViewById(R.id.popup_edit_TV_autonomy);
-            mTextViewCompanyPopUp = inflatedView.findViewById(R.id.popup_edit_TV_company);
-            mTextViewModelPopUp = inflatedView.findViewById(R.id.popup_edit_TV_model);
+            mEDTYearPopUp = inflatedView.findViewById(R.id.popup_edit_TIET_year);
+            mEDTBatteryLifePopUp = inflatedView.findViewById(R.id.popup_edit_TIET_batteryLife);
+            mEDTLastTechRevisionPopUp= inflatedView.findViewById(R.id.popup_edit_TIET_lastTechRevision);
+            mEDTAutonomyPopUp = inflatedView.findViewById(R.id.popup_edit_TIET_autonomy);
+            mEDTCompanyPopUp = inflatedView.findViewById(R.id.popup_edit_TIET_company);
+            mEDTModelPopUp = inflatedView.findViewById(R.id.popup_edit_TIET_model);
         }
 
 
