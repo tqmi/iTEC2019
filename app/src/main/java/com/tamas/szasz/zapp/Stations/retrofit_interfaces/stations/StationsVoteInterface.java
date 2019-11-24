@@ -8,11 +8,12 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface StationsVoteInterface {
 
 
-    @GET("Stations/{id}/Vote?newVote={value}")
-    Call<StationsVotesResponse> sendVote(@HeaderMap Map<String , String> headers, @Path("id") String id,@Path("value") String value);
+    @GET("Stations/{id}/Vote")
+    Call<StationsVotesResponse> sendVote(@HeaderMap Map<String , String> headers, @Path("id") String id,@Query("newVote") String value);
 
 }
