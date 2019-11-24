@@ -135,20 +135,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/act_login_TV_ForgotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="32dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/act_login_TV_ForgotPassword"
-                    android:textAlignment="center"
-                    android:textColor="#6598db" />
 
                 <ImageView
                     android:id="@+id/act_login_IV_ShowPassword"
@@ -156,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="12dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"

@@ -24,14 +24,17 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_settings_20px" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="refreshtations"
-            android:text="Button" />
-
-
+        <ImageView
+            android:id="@+id/act_navigation_IV_Reload"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:onClick="refreshStations"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/ic_refresh_24px" />
 
 
     </fragment>
