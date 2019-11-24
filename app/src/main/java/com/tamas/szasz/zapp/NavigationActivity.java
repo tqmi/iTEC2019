@@ -79,6 +79,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -134,27 +135,23 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        // Retrieve the data from the marker.
-        Integer clickCount = (Integer) marker.getTag();
+        Station selectedStation = StationHandler.getInstance().getStationByMarker(marker);
+        StationsVotesThread stationsVotesThread = new StationsVotesThread(this, selectedStation);
 
-        // Check if a click count was set, then display the click count.
-        if (clickCount != null) {
-            clickCount = clickCount + 1;
-            marker.setTag(clickCount);
-            Toast.makeText(this,
-                    marker.getTitle() +
-                            " has been clicked " + clickCount + " times.",
-                    Toast.LENGTH_SHORT).show();
+        stationsVotesThread.run();
+
+        try {
+            stationsVotesThread.join();
+            showStationPopUp(this.findViewById(R.id.act_navigation_LL), selectedStation);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        showStationPopUp(this.findViewById(R.id.act_navigation_LL), marker);
-        // Return false to indicate that we have not consumed the event and that we wish
-        // for the default behavior to occur (which is for the camera to move such that the
-        // marker is centered and for the marker's info window to open, if it has one).
+
         return false;
     }
 
-    private void showStationPopUp(View view, Marker marker) {
-        final View _inflatedView = LayoutInflater.from(this).inflate(R.layout.popup_add_station, null, false);
+    private void showStationPopUp(View view, Station selectedStation) {
+        final View _inflatedView = LayoutInflater.from(this).inflate(R.layout.popup_details_station, null, false);
         // get device size
         Display _display = this.getWindowManager().getDefaultDisplay();
         final Point _size = new Point();
@@ -163,31 +160,50 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y /4 + 24, true, this, view);
         mPopWindow.setLocation(view, Gravity.TOP, 0, 0);
         mPopWindow.setAnimationStyle(R.style.PopupAnimationTop);
-        setUpPopupButtonsDetails(_inflatedView, marker);
+        setUpPopupButtonsDetails(_inflatedView, selectedStation);
+        setUpChargingSocketsNumber(_inflatedView, selectedStation);
     }
 
-    private void setUpPopupButtonsDetails(View inflatedView, final Marker marker) {
+    private void setUpChargingSocketsNumber(View inflatedView, Station selectedStation) {
+        TextView textView = inflatedView.findViewById(R.id.popup_details_TV_charging_sockets);
+        textView.setText(selectedStation.getTotalSockets());
+    }
+
+
+    private void setUpPopupButtonsDetails(View inflatedView, final Station selectedStation) {
         Button upVote = inflatedView.findViewById(R.id.popup_details_BTN_up_vote);
         Button downVote = inflatedView.findViewById(R.id.popup_details_BTN_down_vote);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Up vote:").append(" ").append(selectedStation.getUpVotes());
+        upVote.setText(stringBuilder.toString());
+        stringBuilder.delete(0, stringBuilder.length());
+        stringBuilder.append("Down vote:").append(" ").append(selectedStation.getDownVotes());
+        downVote.setText(stringBuilder.toString());
 
         upVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Station selectedStation = StationHandler.getInstance().getStationByMarker(marker);
                 StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, true);
                 stationsVoteThread.run();
+
+                try {
+                    stationsVoteThread.join();
+                    mPopWindow.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         downVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Station selectedStation = StationHandler.getInstance().getStationByMarker(marker);
                 StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, true);
                 stationsVoteThread.run();
 
                 try {
                     stationsVoteThread.join();
+                    mPopWindow.dismiss();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
