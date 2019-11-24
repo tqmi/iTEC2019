@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onRegisterSuccess(){
-        Log.d("REGITER SUCCESS","here");
+        Log.d("REGISTER SUCCESS","here");
 
         goToMapsActivity();
 
