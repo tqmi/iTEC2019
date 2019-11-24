@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class StationsVotesThread extends Thread {
 
-    private static final String TAG = "STATIONS ADD";
+    private static final String TAG = "STATIONS VOTES";
     private Context context;
     private String name;
     private int totalSockets;
