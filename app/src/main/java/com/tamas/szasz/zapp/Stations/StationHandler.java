@@ -40,7 +40,7 @@ public class StationHandler {
 
         if(!isPartOfStations(s)) {
             stations.add(s);
-            s.setMarker(context.addMarker(s.getLatLng()));
+            s.setMarker(context.addMarker(s.getLatLng(),s.getName()));
 
         }
 
@@ -64,7 +64,7 @@ public class StationHandler {
 
     public void updateStation(Station s){
         s.getMarker().remove();
-        s.setMarker(context.addMarker(s.getLatLng()));
+        s.setMarker(context.addMarker(s.getLatLng(),s.getName()));
     }
 
     public Station getStationByMarker(Marker marker){

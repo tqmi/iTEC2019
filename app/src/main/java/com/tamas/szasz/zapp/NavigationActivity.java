@@ -292,7 +292,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
-    public Marker addMarker(LatLng latLng){
+    public Marker addMarker(LatLng latLng,String name){
 //        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
 //        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
 //                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -300,7 +300,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 //        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 //        drawable.draw(canvas);
 //        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
-        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true).title(name));
     }
 
 }
