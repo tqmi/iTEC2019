@@ -129,7 +129,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-    @Override
     public boolean onMarkerClick(final Marker marker) {
 
         Toast.makeText(this,"Pressed", Toast.LENGTH_LONG).show();
@@ -293,14 +292,14 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     public Marker addMarker(LatLng latLng){
-        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
-        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true).icon(bitmapDescriptor));
+//        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
+//        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+//                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas canvas = new Canvas(bitmap);
+//        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+//        drawable.draw(canvas);
+//        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
     }
 
 }
