@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -60,6 +61,7 @@ import com.tamas.szasz.zapp.Stations.Station;
 import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsListThread;
+import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsVoteThread;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsVotesThread;
 import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 import com.tamas.szasz.zapp.main.fragments.model.CustomPopupWindow;
@@ -83,7 +85,7 @@ import java.util.ArrayList;
 
 import static androidx.navigation.Navigation.findNavController;
 
-public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener{
+public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener, GoogleMap.OnMarkerClickListener {
     private GoogleMap mMap;
     private boolean permissions = false;
     private CustomPopupWindow mPopWindow;
@@ -127,10 +129,11 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         if(this.permissions) {
             addUserLocation();
         }
+        mMap.setOnMarkerClickListener(this);
     }
 
+    @Override
     public boolean onMarkerClick(final Marker marker) {
-
         // Retrieve the data from the marker.
         Integer clickCount = (Integer) marker.getTag();
 
@@ -163,7 +166,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         setUpPopupButtonsDetails(_inflatedView, marker);
     }
 
-    private void setUpPopupButtonsDetails(View inflatedView, Marker marker) {
+    private void setUpPopupButtonsDetails(View inflatedView, final Marker marker) {
         Button upVote = inflatedView.findViewById(R.id.popup_details_BTN_up_vote);
         Button downVote = inflatedView.findViewById(R.id.popup_details_BTN_down_vote);
 
@@ -183,7 +186,11 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                 StationsVoteThread stationsVoteThread = new StationsVoteThread(selectedStation, true);
                 stationsVoteThread.run();
 
-                stationsVoteThread.join();
+                try {
+                    stationsVoteThread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -340,7 +347,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
-    public Marker addMarker(LatLng latLng){
+    public Marker addMarker(LatLng latLng,String name){
 //        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
 //        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
 //                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -348,7 +355,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 //        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 //        drawable.draw(canvas);
 //        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
-        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true));
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true).title(name));
     }
 
 }

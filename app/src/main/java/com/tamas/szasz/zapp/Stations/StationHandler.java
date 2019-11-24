@@ -3,6 +3,7 @@ package com.tamas.szasz.zapp.Stations;
 import android.content.Context;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.tamas.szasz.zapp.NavigationActivity;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class StationHandler {
 
         if(!isPartOfStations(s)) {
             stations.add(s);
-            s.setMarker(context.addMarker(s.getLatLng()));
+            s.setMarker(context.addMarker(s.getLatLng(),s.getName()));
 
         }
 
@@ -63,7 +64,18 @@ public class StationHandler {
 
     public void updateStation(Station s){
         s.getMarker().remove();
-        s.setMarker(context.addMarker(s.getLatLng()));
+        s.setMarker(context.addMarker(s.getLatLng(),s.getName()));
+    }
+
+    public Station getStationByMarker(Marker marker){
+
+        for(Station station : stations){
+            if(station.getMarker().equals(marker))
+                return station;
+        }
+
+        return null;
+
     }
 
 }

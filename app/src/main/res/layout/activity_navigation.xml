@@ -35,8 +35,5 @@
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/ic_refresh_24px" />
-
-
-
     </fragment>
 </LinearLayout>
