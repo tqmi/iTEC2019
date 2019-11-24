@@ -58,6 +58,7 @@ public class User {
     }
 
     public String getToken() {
+        Log.d("TOKEN",token);
         return token;
     }
 

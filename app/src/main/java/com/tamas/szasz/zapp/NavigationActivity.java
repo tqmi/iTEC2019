@@ -159,7 +159,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         final Point _size = new Point();
         _display.getSize(_size);
 
-        mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y /4 + 24, true, this, view);
+        mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y /3 + 24, true, this, view);
         mPopWindow.setLocation(view, Gravity.TOP, 0, 0);
         setUpPopupButtonsDetails(_inflatedView, selectedStation);
         setUpChargingSocketsNumber(_inflatedView, selectedStation);
