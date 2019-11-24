@@ -203,7 +203,7 @@
                 style="@style/InputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:hint="@string/popup_edit_add_TIET_lastTechRevision_hint"
                 android:focusable="false"/>
 
