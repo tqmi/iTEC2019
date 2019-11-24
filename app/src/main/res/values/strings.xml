@@ -77,4 +77,5 @@
     <string name="popup_edit_add_TIET_year_hint">Year</string>
     <string name="popup_edit_add_TIET_lastTechRevision_hint">Last Tech Revision</string>
     <string name="popup_edit_BTN_add">Add changes</string>
+    <string name="alert_out_of_verification">Your last tech revision expired for the model:</string>
 </resources>

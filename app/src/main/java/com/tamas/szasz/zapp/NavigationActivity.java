@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -24,32 +23,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.TileOverlay;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.tamas.szasz.zapp.Stations.StationHandler;
@@ -58,31 +41,18 @@ import com.tamas.szasz.zapp.Stations.res.PointF;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsAddThread;
 
 import com.tamas.szasz.zapp.Stations.Station;
-import com.tamas.szasz.zapp.Stations.StationHandler;
-import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsListThread;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsVoteThread;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsVotesThread;
-import com.tamas.szasz.zapp.main.fragments.HomeFragment;
 import com.tamas.szasz.zapp.main.fragments.model.CustomPopupWindow;
-
-import androidx.drawerlayout.widget.DrawerLayout;
+import com.tamas.szasz.zapp.notification.NotificationRevision;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -103,6 +73,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         StationsUpdater.getInstance().setContext(this);
         StationHandler.getInstance().setContext(this);
         StationsUpdater.getInstance().start();
+
+        NotificationRevision notificationRevision = new NotificationRevision(this);
+        notificationRevision.checkIfOutOfService();
 
     }
 
