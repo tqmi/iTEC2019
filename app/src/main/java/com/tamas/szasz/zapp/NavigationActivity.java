@@ -166,7 +166,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     private void setUpChargingSocketsNumber(View inflatedView, Station selectedStation) {
         TextView textView = inflatedView.findViewById(R.id.popup_details_TV_charging_sockets);
-        textView.setText(selectedStation.getTotalSockets());
+        textView.setText(selectedStation.getTotalSockets() + "");
     }
 
 
@@ -364,14 +364,14 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     public Marker addMarker(LatLng latLng,String name){
-//        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
-//        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-//                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-//        Canvas canvas = new Canvas(bitmap);
-//        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-//        drawable.draw(canvas);
-//        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
-        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true).title(name));
+        Drawable drawable = AppCompatResources.getDrawable(this, R.drawable.ic_marker_station);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+        return  mMap.addMarker(new MarkerOptions().position(latLng).visible(true).title(name).icon(bitmapDescriptor));
     }
 
 }
