@@ -28,11 +28,11 @@ public class StationsVoteThread extends Thread {
     public void run() {
         StationsVoteInterface stationsVoteInterface = RetrofitInstance.getRetrofitInstance().create(StationsVoteInterface.class);
 
-        String vote;
+        boolean vote;
         if(value)
-            vote = "true";
+            vote = true;
         else
-            vote = "false";
+            vote = false;
 
         Call<StationsVotesResponse> call = stationsVoteInterface.sendVote(Header.getHeader(),station.getId(),vote);
         Log.d(TAG, call.request().toString());

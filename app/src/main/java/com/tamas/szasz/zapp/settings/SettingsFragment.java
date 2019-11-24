@@ -85,8 +85,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 StationsUpdater.getInstance().closeThread();
                 StationHandler.getInstance().getStations().clear();
                 User.getInstance().deleteToken();
-                getActivity().finishAffinity();
                 Intent loginIntent = new Intent(context, LoginActivity.class);
+                loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(loginIntent);
                 return false;
             }

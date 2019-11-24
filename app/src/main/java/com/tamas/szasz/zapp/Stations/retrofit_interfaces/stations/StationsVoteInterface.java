@@ -15,6 +15,6 @@ public interface StationsVoteInterface {
 
 
     @PUT("Stations/{id}/Vote")
-    Call<StationsVotesResponse> sendVote(@HeaderMap Map<String , String> headers, @Path("id") String id,@Query("newVote") String value);
+    Call<StationsVotesResponse> sendVote(@HeaderMap Map<String , String> headers, @Path("id") String id,@Query("newVote") boolean value);
 
 }
