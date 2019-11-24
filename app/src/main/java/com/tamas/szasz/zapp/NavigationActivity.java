@@ -131,6 +131,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             addUserLocation();
         }
         mMap.setOnMarkerClickListener(this);
+        mMap.getUiSettings().setCompassEnabled(false);
     }
 
     @Override
@@ -138,19 +139,20 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         Station selectedStation = StationHandler.getInstance().getStationByMarker(marker);
         StationsVotesThread stationsVotesThread = new StationsVotesThread(this, selectedStation);
 
-        stationsVotesThread.run();
+        stationsVotesThread.start();
 
         try {
             stationsVotesThread.join();
-            showStationPopUp(this.findViewById(R.id.act_navigation_LL), selectedStation);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
+
         return false;
     }
 
-    private void showStationPopUp(View view, Station selectedStation) {
+    public void showStationPopUp(View view, Station selectedStation) {
         final View _inflatedView = LayoutInflater.from(this).inflate(R.layout.popup_details_station, null, false);
         // get device size
         Display _display = this.getWindowManager().getDefaultDisplay();

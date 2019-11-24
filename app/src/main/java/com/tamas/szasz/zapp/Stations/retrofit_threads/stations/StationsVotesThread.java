@@ -1,8 +1,18 @@
 package com.tamas.szasz.zapp.Stations.retrofit_threads.stations;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
 
+import androidx.appcompat.content.res.AppCompatResources;
+
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.tamas.szasz.zapp.NavigationActivity;
+import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.Stations.Station;
 import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.res.PointF;
@@ -21,19 +31,14 @@ import retrofit2.Response;
 public class StationsVotesThread extends Thread {
 
     private static final String TAG = "STATIONS VOTES";
-    private Context context;
+    private NavigationActivity context;
     private String name;
     private int totalSockets;
     private int freeSockets;
     private PointF location;
     private Station station;
 
-    public StationsVotesThread(Context context) {
-        super();
-        this.context = context;
-    }
-
-    public StationsVotesThread(Context context, Station station){
+    public StationsVotesThread(NavigationActivity context, Station station){
         super();
         this.context = context;
         this.station = station;
@@ -50,27 +55,40 @@ public class StationsVotesThread extends Thread {
             @Override
             public void onResponse(Call<StationsVotesResponse[]> call, Response<StationsVotesResponse[]> response) {
                 Log.d(TAG,response+"");
-                try{
-                    int up = 0 ;
-                    int down = 0;
-                        for(int i = 0 ; i < response.body().length ; i++ ){
 
-                            if(response.body()[i].isVote()){
-                                up++;
-                            }else{
-                                down++;
+                if(response.code() == 200){
+                    try{
+
+                        int up = 0 ;
+                        int down = 0;
+                            for(int i = 0 ; i < response.body().length ; i++ ){
+
+                                if(response.body()[i].isVote()){
+                                    up++;
+                                }else{
+                                    down++;
+                                }
+
                             }
+                            station.setDownVotes(down);
+                            station.setUpVotes(up);
 
-                        }
-                        station.setDownVotes(down);
-                        station.setUpVotes(up);
+                            context.showStationPopUp(context.findViewById(R.id.act_navigation_LL), station);
 
-                    Log.d(TAG,"success");
-                }catch (Exception e){
+                        Log.d(TAG,"success");
+                    }catch (Exception e){
 
-                    Log.d(TAG,"error");
-                    e.printStackTrace();
-                    //TODO: handle failed
+                        Log.d(TAG,"error");
+                        e.printStackTrace();
+                        //TODO: handle failed
+                    }
+                }else if(response.code() == 404){
+                    station.setDownVotes(0);
+                    station.setUpVotes(0);
+
+
+                    context.showStationPopUp(context.findViewById(R.id.act_navigation_LL), station);
+
                 }
 
             }

@@ -21,6 +21,7 @@ public class Station {
     private Marker marker;
     private int upVotes = 0;
     private int downVotes = 0;
+    private final int statusTrustedMargin = 5;
 
     public int getUpVotes() {
         return upVotes;
@@ -136,6 +137,12 @@ public class Station {
 
     public LatLng getLatLng(){
         return latLng;
+    }
+
+    public boolean isTrusted(){
+
+        return upVotes >= statusTrustedMargin;
+
     }
 
 }
