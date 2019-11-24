@@ -14,7 +14,7 @@ import retrofit2.Response;
 
 public class StationsVoteThread extends Thread {
 
-    private static final String TAG = "STATIONS VOTES";
+    private static final String TAG = "STATIONS VOTE";
     private Station station;
     private boolean value;
 
@@ -41,7 +41,7 @@ public class StationsVoteThread extends Thread {
             public void onResponse(Call<StationsVotesResponse> call, Response<StationsVotesResponse> response) {
                 Log.d(TAG,response+"");
                 try{
-
+                    Log.d(TAG,response.body().isVote()+"");
                     Log.d(TAG,"success");
                 }catch (Exception e){
 
