@@ -173,10 +173,10 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         Button upVote = inflatedView.findViewById(R.id.popup_details_BTN_up_vote);
         Button downVote = inflatedView.findViewById(R.id.popup_details_BTN_down_vote);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Up vote:").append(" ").append(selectedStation.getUpVotes());
+        stringBuilder.append("Up:").append(" ").append(selectedStation.getUpVotes());
         upVote.setText(stringBuilder.toString());
         stringBuilder.delete(0, stringBuilder.length());
-        stringBuilder.append("Down vote:").append(" ").append(selectedStation.getDownVotes());
+        stringBuilder.append("Down:").append(" ").append(selectedStation.getDownVotes());
         downVote.setText(stringBuilder.toString());
 
         upVote.setOnClickListener(new View.OnClickListener() {
