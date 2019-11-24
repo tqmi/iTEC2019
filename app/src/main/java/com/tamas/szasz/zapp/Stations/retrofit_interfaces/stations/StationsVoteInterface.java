@@ -7,13 +7,14 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface StationsVoteInterface {
 
 
-    @GET("Stations/{id}/Vote")
+    @PUT("Stations/{id}/Vote")
     Call<StationsVotesResponse> sendVote(@HeaderMap Map<String , String> headers, @Path("id") String id,@Query("newVote") String value);
 
 }
