@@ -1,6 +1,7 @@
 package com.tamas.szasz.zapp.Stations;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.tamas.szasz.zapp.NavigationActivity;
 import com.tamas.szasz.zapp.Stations.retrofit_threads.stations.StationsListThread;
@@ -31,13 +32,7 @@ public class StationsUpdater extends Thread {
             StationsListThread stationsListThread = new StationsListThread();
             stationsListThread.run();
 
-
-            try {
-                stationsListThread.join();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            Log.d("Running", "Run");
 
             try {
                 Thread.sleep(30000);
@@ -56,6 +51,7 @@ public class StationsUpdater extends Thread {
     public void closeThread(){
         running = false;
         interrupt();
+        instance = null;
     }
 
     public void setContext(Context context){

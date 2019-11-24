@@ -22,6 +22,7 @@ import androidx.preference.SwitchPreference;
 import com.tamas.szasz.zapp.R;
 import com.tamas.szasz.zapp.SettingsActivity;
 import com.tamas.szasz.zapp.Stations.Station;
+import com.tamas.szasz.zapp.Stations.StationHandler;
 import com.tamas.szasz.zapp.Stations.StationsUpdater;
 import com.tamas.szasz.zapp.credentials.User;
 import com.tamas.szasz.zapp.login.LoginActivity;
@@ -82,6 +83,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 StationsUpdater.getInstance().closeThread();
+                StationHandler.getInstance().getStations().clear();
                 User.getInstance().deleteToken();
                 getActivity().finishAffinity();
                 Intent loginIntent = new Intent(context, LoginActivity.class);
