@@ -19,6 +19,24 @@ public class Station {
     private String id;
     private LatLng latLng;
     private Marker marker;
+    private int upVotes = 0;
+    private int downVotes = 0;
+
+    public int getUpVotes() {
+        return upVotes;
+    }
+
+    public void setUpVotes(int upVotes) {
+        this.upVotes = upVotes;
+    }
+
+    public int getDownVotes() {
+        return downVotes;
+    }
+
+    public void setDownVotes(int downVotes) {
+        this.downVotes = downVotes;
+    }
 
     public Marker getMarker() {
         return marker;

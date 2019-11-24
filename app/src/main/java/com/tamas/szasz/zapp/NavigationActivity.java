@@ -73,6 +73,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 
@@ -167,17 +168,13 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     }
     @Override
     public void onMapLongClick(LatLng point) {
-        showPopupWindows(this.findViewById(R.id.act_navigation_LL), point);
-        mMap.clear();
-        mMap.addMarker(new MarkerOptions()
+        Marker marker;
+        marker = mMap.addMarker(new MarkerOptions()
                 .position(point)
                 .title("Selected Location")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        Spinner selectMenu = new Spinner(this);
-        String[] options = new String[]{"option1","option2"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,options);
-        selectMenu.setAdapter(adapter);
-        selectMenu.setEnabled(true);
+        showPopupWindows(this.findViewById(R.id.act_navigation_LL), point,marker);
+
     }
     private void checkPermissions() {
         if (!isFineLocationPermissionGranted() || !isCoarseLocationPermissionGranted()){
@@ -199,7 +196,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
 
 
-    private void showPopupWindows(View view, LatLng point) {
+    private void showPopupWindows(View view, LatLng point, final Marker marker) {
         final View _inflatedView = LayoutInflater.from(this).inflate(R.layout.popup_add_station, null, false);
         // get device size
         Display _display = this.getWindowManager().getDefaultDisplay();
@@ -212,7 +209,16 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         setUpEditTexts(_inflatedView);
         setUpLLayouts(_inflatedView);
         setUpPopupButtons(_inflatedView, point);
+        mPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener(){
+
+            @Override
+            public void onDismiss() {
+                marker.remove();
+            }
+        });
     }
+
+
 
     private void setUpPopupButtons(View inflatedView, final LatLng point) {
         Button buttonAddStation = inflatedView.findViewById(R.id.popup_add_station_BTN_add_station);
@@ -231,6 +237,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    mPopWindow.dismiss();
                 }
             }
         });

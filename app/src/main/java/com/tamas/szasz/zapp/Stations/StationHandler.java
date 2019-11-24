@@ -61,4 +61,9 @@ public class StationHandler {
 
     }
 
+    public void updateStation(Station s){
+        s.getMarker().remove();
+        s.setMarker(context.addMarker(s.getLatLng()));
+    }
+
 }
