@@ -181,6 +181,13 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         stringBuilder.append("Down:").append(" ").append(selectedStation.getDownVotes());
         downVote.setText(stringBuilder.toString());
 
+        TextView textView = inflatedView.findViewById(R.id.popup_details_TV_trusted);
+        if(selectedStation.isTrusted()) {
+            textView.setText("Trusted");
+        } else {
+            textView.setText("Untrusted");
+        }
+
         upVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,7 +290,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     private void showPopupWindows(View view, LatLng point, final Marker marker) {
         final View _inflatedView = LayoutInflater.from(this).inflate(R.layout.popup_add_station, null, false);
-        // get device size
         Display _display = this.getWindowManager().getDefaultDisplay();
         final Point _size = new Point();
         _display.getSize(_size);
