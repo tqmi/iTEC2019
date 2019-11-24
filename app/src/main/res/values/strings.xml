@@ -70,4 +70,11 @@
     <string name="popup_add_station_BTN_add">Add station</string>
     <string name="popup_details_down_vote">Down Vote</string>
     <string name="popup_details_up_vote">Up Vote</string>
+    <string name="popup_edit_add_TIET_model_hint">Model</string>
+    <string name="popup_edit_add_TIET_company_hint">Company</string>
+    <string name="popup_edit_add_TIET_autonomy_hint">Autonomy</string>
+    <string name="popup_edit_add_TIET_batteryLife_hint">Battery Life</string>
+    <string name="popup_edit_add_TIET_year_hint">Year</string>
+    <string name="popup_edit_add_TIET_lastTechRevision_hint">Last Tech Revision</string>
+    <string name="popup_edit_BTN_add">Add changes</string>
 </resources>

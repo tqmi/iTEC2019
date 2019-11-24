@@ -86,7 +86,7 @@ public class CarsFragment extends Fragment {
         final Point _size = new Point();
         _display.getSize(_size);
 
-        mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y - 300 , true, getContext(), view);
+        mPopWindow = new CustomPopupWindow(_inflatedView, _size.x - 50, _size.y / 2 + 100 , true, getContext(), view);
         mPopWindow.setLocation(view, Gravity.BOTTOM, 0, 0);
         setUpEditTexts(_inflatedView);
         setUpLLayouts(_inflatedView);
@@ -109,8 +109,6 @@ public class CarsFragment extends Fragment {
         mTIETBatteryLife = inflatedView.findViewById(R.id.frag_cars_add_TIET_batteryLife);
         mTIETYear = inflatedView.findViewById(R.id.frag_cars_add_TIET_year);
         mTIETLastTechRevision = inflatedView.findViewById(R.id.frag_cars_add_TIET_lastTechRevision);
-
-
     }
 
     private void setUpPopupButtons(View inflatedView) {
