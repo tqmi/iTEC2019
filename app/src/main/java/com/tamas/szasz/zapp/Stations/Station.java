@@ -141,7 +141,7 @@ public class Station {
 
     public boolean isTrusted(){
 
-        return upVotes >= statusTrustedMargin;
+        return ((upVotes-downVotes) >= statusTrustedMargin);
 
     }
 
